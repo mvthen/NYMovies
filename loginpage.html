@@ -59,15 +59,15 @@ $(document).ready(function() {
 	
 	<!--CONTENT-->
     <div class="content">
-	<!--USERNAME--><input name="username" type="text" class="input username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
-    <!--PASSWORD--><input name="password" type="password" class="input password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
+	<!--USERNAME--><input name="username" type="text" class="input username" id = "username" value="Username" onfocus="this.value=''" /><!--END USERNAME-->
+    <!--PASSWORD--><input name="password" type="password" class="input password" id = "password" value="Password" onfocus="this.value=''" /><!--END PASSWORD-->
     </div>
     <!--END CONTENT-->
     
     <!--FOOTER-->
     <div class="footer">
-    <!--LOGIN BUTTON--><input type="submit" name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
-    <!--REGISTER BUTTON--><input type="submit" name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
+    <!--LOGIN BUTTON--><input name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
+    <!--REGISTER BUTTON--><input  name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
     </div>
     <!--END FOOTER-->
 
@@ -78,6 +78,9 @@ $(document).ready(function() {
 <!--END WRAPPER-->
 
 <!--GRADIENT--><div class="gradient"></div><!--END GRADIENT-->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/app.js"></script>
+
 
 </body>
 </html>
