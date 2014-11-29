@@ -29,36 +29,24 @@ $(document).ready(function() {
             });
     }
     
-    $('#login-form').bootstrapValidator({
-                feedbackIcons: {
+ $('#login').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
             username: {
-                message: 'The username is not valid',
                 validators: {
-                    remote: {
-                message: 'Please enter a valid 7 or 8-digit NYT userID. Note that this differs from Username.',
-                validators: {
-                    stringLength: {
-                        min: 7,
-                        max: 8
-                    },
-                    regexp: {
-                        regexp: /^[0-9]+$/,
-                    }
-                }
+                    notEmpty: {
+                        message: 'The username is required'
                     }
                 }
             },
             password: {
-                message: 'The email address is not valid',
                 validators: {
-                    remote: {
-                        message: 'Please enter a valid password',
-                        data: {
-                            type: 'password'
-                        }
+                    notEmpty: {
+                        message: 'The password is required'
                     }
                 }
             }
