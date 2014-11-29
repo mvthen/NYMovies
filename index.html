@@ -38,9 +38,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-
-                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login/Register</a>
-
+                    <li><a href="#" data-toggle="modal" data-target="#myModal">Help</a>
+                    </li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal">About</a>
+                    </li>
+                    <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                    </li>
+                    <li><a href="#" data-toggle="modal" data-target="#registerModal">New User? Register. </a>
                     </li>
                 </ul>
 
@@ -73,14 +77,44 @@
         </div>
     </div>
 
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form name="login-form" id="register" class="login-form form-group" action="" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title header">Create a new Kernel!</h4>
+                </div>
+                <div class="modal-wrapper">
+                    <div class="user-icon"></div>
+                    <div class="pass-icon"></div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-body">
+                        <div class="content">
+                            <input name="username" type="text" class="input username" id="username" value="Username" onfocus="this.value=''" />
+                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
+
+                        </div>
+
+                    </div>
+                    <div id="registerMessages"></div>
+
+                </div>
+                <div class="modal-footer footer">
+                    <!-- <input type="submit" name="submit" value="Login" class="button" /> -->
+                    <input type="submit" name="submit" value="Register" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form name="login-form" id="login" class="login-form form-group" action="" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
+                    <h4 class="modal-title header" id="myModalLabel">Login to your Kernel!</h4>
                 </div>
                 <div class="modal-wrapper">
                     <div class="user-icon"></div>
@@ -97,7 +131,7 @@
                 </div>
                 <div class="modal-footer footer">
                     <input type="submit" name="submit" value="Login" class="button" />
-                    <input type="submit" name="submit" value="Register" class="register" />
+                    <!-- <input type="submit" name="submit" value="Register" class="register" /> -->
                 </div>
             </form>
         </div>
