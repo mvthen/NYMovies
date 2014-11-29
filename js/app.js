@@ -31,11 +31,9 @@ $(document).ready(function() {
     
  $('#login').bootstrapValidator({
         feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+            invalid: 'Please enter username and password.'
         },
-        fields: {
+                fields: {
             username: {
                 validators: {
                     notEmpty: {
@@ -43,13 +41,14 @@ $(document).ready(function() {
                     }
                 }
             },
-            password: {
+                                        password: {
                 validators: {
                     notEmpty: {
                         message: 'The password is required'
                     }
                 }
             }
+
         }
     });
 
