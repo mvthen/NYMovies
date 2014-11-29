@@ -15,14 +15,12 @@
     <link href="css/app.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/bootstrapValidator.css" rel="stylesheet">
+    <!-- <link href="css/bootstrapValidator.css" rel="stylesheet"> -->
     <link href="css/bootstrapValidator.min.css" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/validator/dist/js/bootstrapValidator.js"></script>
-    <script src="js/validator/dist/js/bootstrapValidator.min.js"></script>
-    <script src="js/app.js"></script>
+
+    
 
 
 </head>
@@ -119,45 +117,12 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-        $('#login-form').bootstrapValidator({
-                feedbackIcons: {
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            username: {
-                message: 'The username is not valid',
-                validators: {
-                    remote: {
-                message: 'Please enter a valid 7 or 8-digit NYT userID. Note that this differs from Username.',
-                validators: {
-                    stringLength: {
-                        min: 7,
-                        max: 8
-                    },
-                    regexp: {
-                        regexp: /^[0-9]+$/,
-                    }
-                }
-                    }
-                }
-            },
-            password: {
-                message: 'The email address is not valid',
-                validators: {
-                    remote: {
-                        message: 'Please enter a valid password',
-                        data: {
-                            type: 'password'
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
+    <script src="js/app.js"></script>
+    <script src="js/validator/dist/js/bootstrapValidator.js"></script>
+    <script src="js/validator/dist/js/bootstrapValidator.min.js"></script>
+    
 </body>
 
 
