@@ -30,28 +30,51 @@ $(document).ready(function() {
     }
     
  $('#login').bootstrapValidator({
-        feedbackIcons: {
-            invalid: 'Please enter username and password.'
+message: 'This value is not valid',
+fields: {
+username: {
+message: 'The username is not valid',
+validators: {
+notEmpty: {
+message: 'The username is required and can\'t be empty'
+},
+stringLength: {
+min: 6,
+max: 30,
+message: 'The username must be more than 6 and less than 30 characters long'
+},
+regexp: {
+regexp: /^[a-zA-Z0-9_\.]+$/,
+message: 'The username can only consist of alphabetical, number, dot and underscore'
+},
+different: {
+field: 'password',
+message: 'The username and password can\'t be the same as each other'
+},
+notEmpty: {
+field: 'password',
+message: 'The password is required and can\'t be empty'
+}
+
+}
+},
+password: {
+    message: "The password is not valid",
+    validators: {
+        notEmpty: {
+            message: "Password must not be empty"
         },
-                fields: {
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required'
-                    }
-                }
-            },
-                                        password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required'
-                    }
-                }
-            }
+        stringLength: {
+            min: 4,
+            max: 30,
+            message: 'The password must be more than 3 and less than 30 characters long'
 
         }
-    });
+    }
+}
 
+}
+});
 
 
 
