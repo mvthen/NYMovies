@@ -1,4 +1,7 @@
+
+
 $(document).ready(function() {
+
 
 	var api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
 
@@ -29,33 +32,7 @@ $(document).ready(function() {
     }
 
 
-    $('#registrationForm').bootstrapValidator({
-        fields: {
-            username: {
-                message: 'The username is not valid',
-                validators: {
-                    remote: {
-                        message: 'Please enter a valid username',
-                        url: '/path/to/backend/',
-                        data: {
-                            type: 'username'
-                        }
-                    }
-                }
-            },
-            password: {
-                message: 'The email address is not valid',
-                validators: {
-                    remote: {
-                        message: 'Please enter a valid password',
-                        data: {
-                            type: 'password'
-                        }
-                    }
-                }
-            }
-        }
-    });
+
 
 
 });
