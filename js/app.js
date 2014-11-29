@@ -1,114 +1,113 @@
 $(document).ready(function() {
 
 
-	var api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
+    var api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
 
-    $(".register").click(function(event) {
+    $("#registerBtn").click(function(event) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         addUser(username, password);
     });
 
-    function addUser(username, password ) {
 
+   $("#loginBtn").click(function (ev) {
+    return $('#login').validate().form();
+    });
+
+
+    function addUser(username, password) {
         var obj = {};
         obj[username] = password;
-
-        var message =
-            $.ajax({ 
-                url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey="+api_key,
+        $.ajax({
+                url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + api_key,
                 data: JSON.stringify(obj),
                 type: "POST",
-                contentType: "application/json", 
+                contentType: "application/json",
                 success: function(data, textStats, XMLHttpRequest) {
-                    console.log("success");
+                    console.log(data);    
                 },
                 error: function(data, textStatus, errorThrown) {
-                    console.log("error");
+                    alert(errorThrown);
                 }
-            });
+        });
     }
-   $('#register').bootstrapValidator({
+
+    $('#register').bootstrapValidator({
         container: '#registerMessages',
-fields: {
-username: {
-validators: {
-notEmpty: {
-message: 'The username is required and can\'t be empty'
-},
-stringLength: {
-min: 6,
-max: 30,
-message: 'The username must be more than 6 and less than 30 characters long'
-},
-regexp: {
-regexp: /^[a-zA-Z0-9_\.]+$/,
-message: 'The username can only consist of alphabetical, number, dot and underscore'
-},
-different: {
-field: 'password',
-message: 'The username and password can\'t be the same as each other'
-}
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    },
+                    different: {
+                        field: 'password',
+                        message: 'The username and password can\'t be the same as each other'
+                    }
 
-}
-},
-password: {
-    validators: {
-        notEmpty: {
-            message: "Password must not be empty"
-        },
-        stringLength: {
-            min: 4,
-            max: 30,
-            message: 'The password must be more than 3 and less than 30 characters long'
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: "Password must not be empty"
+                    },
+                    stringLength: {
+                        min: 4,
+                        max: 30,
+                        message: 'The password must be more than 3 and less than 30 characters long'
+
+                    }
+                }
+            }
 
         }
-    }
-}
+    });
 
-}
-});  
- $('#login').bootstrapValidator({
+    $('#login').bootstrapValidator({
         container: '#messages',
-fields: {
-username: {
-validators: {
-notEmpty: {
-message: 'The username is required and can\'t be empty'
-},
-stringLength: {
-min: 6,
-max: 30,
-message: 'The username must be more than 6 and less than 30 characters long'
-},
-regexp: {
-regexp: /^[a-zA-Z0-9_\.]+$/,
-message: 'The username can only consist of alphabetical, number, dot and underscore'
-},
-different: {
-field: 'password',
-message: 'The username and password can\'t be the same as each other'
-}
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    } 
 
-}
-},
-password: {
-    validators: {
-        notEmpty: {
-            message: "Password must not be empty"
-        },
-        stringLength: {
-            min: 4,
-            max: 30,
-            message: 'The password must be more than 3 and less than 30 characters long'
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: "Password must not be empty"
+                    },
+                    stringLength: {
+                        min: 4,
+                        max: 30,
+                        message: 'The password must be more than 3 and less than 30 characters long'
+
+                    }
+                }
+            }
 
         }
-    }
-}
-
-}
-});
-
-
+    });
 
 });
