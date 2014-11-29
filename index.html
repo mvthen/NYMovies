@@ -11,9 +11,11 @@
     <title>FLATTY - Free Bootstrap 3 Landing Page</title>
 
     <!-- Bootstrap core CSS -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    
     <link href="css/main.css" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
@@ -41,8 +43,15 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="loginpage.html" id="login_register">Login/Register</a></li>
+
+            <li><a href="#" data-toggle="modal" data-target="#myModal">Login/Register</a>
+            <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+			  Launch demo modal
+			</button> -->
+            	
+            </li>
           </ul>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -69,12 +78,44 @@
 	</div><!-- /headerwrap -->
 	
 
+	<!-- Login modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h1 class="modal-title header" id="myModalLabel">Login or Register Here!</h1>
+	      </div>
+	      <div class="wrapper">
+			 <div class="user-icon"></div>
+		    <div class="pass-icon"></div>
+	      <div class="modal-body">
+	      <div class="content">
+	        <input name="username" type="text" class="input username" id = "username" value="Username" onfocus="this.value=''" />
+	        <!--END USERNAME-->
+    		<!--PASSWORD-->
+    		<input name="password" type="password" class="input password" id = "password" value="Password" onfocus="this.value=''" />
+    		</div>
+	      </div>
+	      </div>
+	      <div class="modal-footer">
+	       <button type="button" class="btn btn-default register">Register</button>
+	        <button type="button" class="btn btn-primary">Login</button> 
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+  
+    
+
 	
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
