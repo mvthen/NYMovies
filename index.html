@@ -73,15 +73,19 @@
 	</div><!-- /headerwrap -->
 	
 
-	<!-- Login modal -->
+	
+<!--LOGIN FORM-->
+
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div id="wrapper">
 	  <div class="modal-dialog">
-	    <div class="modal-content">
+	    <!-- <div class="modal-content"> -->
+	    <form name="login-form" class="login-form" action="" method="post">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h1 class="modal-title header" id="myModalLabel">Login or Register Here!</h1>
+	        <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
 	      </div>
-	      <div class="wrapper">
+
 			 <div class="user-icon"></div>
 		    <div class="pass-icon"></div>
 	      <div class="modal-body">
@@ -92,13 +96,17 @@
     		<input name="password" type="password" class="input password" id = "password" value="Password" onfocus="this.value=''" />
     		</div>
 	      </div>
+	      <div class="modal-footer footer">
+	      <!--  <button type="button" class="btn btn-default register">Register</button>
+	        <button type="button" class="btn btn-primary">Login</button>  -->
+	        <!--LOGIN BUTTON--><input name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
+    <!--REGISTER BUTTON--><input  name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
 	      </div>
-	      <div class="modal-footer">
-	       <button type="button" class="btn btn-default register">Register</button>
-	        <button type="button" class="btn btn-primary">Login</button> 
-	      </div>
-	    </div>
+	      </form>
+	    <!-- </div> -->
 	  </div>
+	  </form>
+	</div>
 	</div>
 
   
