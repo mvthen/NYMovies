@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,110 +10,108 @@
     <link rel="shortcut icon" href="assets/img/favicon.png">
 
     <title>NYTimes Movie Ratings</title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet">
 
-    
+    <link href="css/app.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/main.css" rel="stylesheet">
 
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="js/validator/dist/js/bootstrapValidator.js"></script>
-  <script src="js/validator/dist/js/bootstrapValidator.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/validator/dist/js/bootstrapValidator.js"></script>
+    <script src="js/validator/dist/js/bootstrapValidator.min.js"></script>
 
 
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><b>FLATTY</b></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><b>FLATTY</b></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
 
-            <li><a href="#" data-toggle="modal" data-target="#myModal">Login/Register</a>
-            <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    <li><a href="#" data-toggle="modal" data-target="#myModal">Login/Register</a>
+                        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 			  Launch demo modal
 			</button> -->
-            	
-            </li>
-          </ul>
 
-        </div><!--/.nav-collapse -->
-      </div>
+                    </li>
+                </ul>
+
+            </div>
+            <!--/.nav-collapse -->
+        </div>
     </div>
 
-	<div id="headerwrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<h1>Make your landing page<br/>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>Make your landing page<br/>
 					look really good.</h1>
-					<form class="form-inline" role="form">
-					  <div class="form-group">
-					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
-					  </div>
-					  <button type="submit" class="btn btn-warning btn-lg">Invite Me!</button>
-					</form>					
-				</div><!-- /col-lg-6 -->
-				<div class="col-lg-6">
-					<img class="img-responsive" src="images/ipad-hand.png" alt="">
-				</div><!-- /col-lg-6 -->
-				
-			</div><!-- /row -->
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
-	
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg">Invite Me!</button>
+                    </form>
+                </div>
+                <!-- /col-lg-6 -->
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="images/ipad-hand.png" alt="">
+                </div>
+                <!-- /col-lg-6 -->
 
-	
-<!--LOGIN FORM-->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /headerwrap -->
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div id="wrapper">
-	  <div class="modal-dialog">
-	    <!-- <div class="modal-content"> -->
-	    <form name="login-form" class="login-form" action="" method="post">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
-	      </div>
 
-			 <div class="user-icon"></div>
-		    <div class="pass-icon"></div>
-	      <div class="modal-body">
-	      <div class="content">
-	        <input name="username" type="text" class="input username" id = "username" value="Username" onfocus="this.value=''" />
-	        <!--END USERNAME-->
-    		<!--PASSWORD-->
-    		<input name="password" type="password" class="input password" id = "password" value="Password" onfocus="this.value=''" />
-    		</div>
-	      </div>
-	      <div class="modal-footer footer">
-	      <!--  <button type="button" class="btn btn-default register">Register</button>
-	        <button type="button" class="btn btn-primary">Login</button>  -->
-	        <!--LOGIN BUTTON--><input name="submit" value="Login" class="button" /><!--END LOGIN BUTTON-->
-    <!--REGISTER BUTTON--><input  name="submit" value="Register" class="register" /><!--END REGISTER BUTTON-->
-	      </div>
-	      </form>
-	    <!-- </div> -->
-	  </div>
-	  </form>
-	</div>
-	</div>
 
-  
-    
+    <!--LOGIN FORM-->
 
-	
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form name="login-form" class="login-form" action="" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
+                    </div>
+                    <div class="modal-wrapper">
+	                    <div class="user-icon"></div>
+	                    <div class="pass-icon"></div>
+	                    <div class="modal-body">
+	                        <div class="content">
+	                            <input name="username" type="text" class="input username" id="username" value="Username" onfocus="this.value=''" />
+	                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
+	                        </div>
+	                    </div>
+                    </div>
+                    <div class="modal-footer footer">
+                        <input type= "submit" name="submit" value="Login" class="button" />
+                        <input type="submit" name="submit" value="Register" class="register" />
+                    </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -120,5 +119,6 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/bootstrap.min.js"></script>
-  </body>
+</body>
+
 </html>
