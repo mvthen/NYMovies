@@ -30,10 +30,9 @@ $(document).ready(function() {
     }
     
  $('#login').bootstrapValidator({
-message: 'This value is not valid',
+container: '#messages',
 fields: {
 username: {
-message: 'The username is not valid',
 validators: {
 notEmpty: {
 message: 'The username is required and can\'t be empty'
@@ -50,16 +49,11 @@ message: 'The username can only consist of alphabetical, number, dot and undersc
 different: {
 field: 'password',
 message: 'The username and password can\'t be the same as each other'
-},
-notEmpty: {
-field: 'password',
-message: 'The password is required and can\'t be empty'
 }
 
 }
 },
 password: {
-    message: "The password is not valid",
     validators: {
         notEmpty: {
             message: "Password must not be empty"

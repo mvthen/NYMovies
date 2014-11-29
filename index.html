@@ -9,26 +9,20 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-
     <title></title>
     <link href="css/bootstrap.css" rel="stylesheet">
-
     <link href="css/app.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/main.css" rel="stylesheet">
-    <!-- <link href="css/bootstrapValidator.css" rel="stylesheet"> -->
     <link href="css/bootstrapValidator.min.css" rel="stylesheet">
-
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 
-    
+
 
 
 </head>
 
 <body>
-
-    <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -39,31 +33,28 @@
                 </button>
 
                 <a class="navbar-brand" href="#">
-                <img class = "logo" src="images/logo_white.png"><b>POPCORN</b>
+                    <img class="logo" src="images/logo_white.png"><b>POPCORN</b>
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
                     <li><a href="#" data-toggle="modal" data-target="#myModal">Login/Register</a>
-                        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-			  Launch demo modal
-			</button> -->
 
                     </li>
                 </ul>
 
             </div>
-            <!--/.nav-collapse -->
         </div>
     </div>
 
     <div id="headerwrap">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <h1>Find Movie Ratings <h2>powered by NY Times </h2></h1>
-                    <form class="form-inline" role="form">
+                <form class="form-inline" role="form">
+
+                    <div class="col-lg-6">
+                        <h1>Find Movie Ratings <h2>powered by NY Times </h2></h1>
                         <div class="form-group">
                             <input type="email" class="form-control" id="Title" placeholder="Titles, phrases">
                             <input type="email" class="form-control" id="Director" placeholder="Directors, etc">
@@ -71,66 +62,53 @@
                             <input type="email" class="form-control" id="Critic" placeholder="Critics reviews">
                         </div>
                         <button type="submit" class="btn btn-warning btn-xl">Search</button>
-                    </form>
-                </div>
-                <!-- /col-lg-6 -->
+                    </div>
+                </form>
+
                 <div class="col-lg-6">
                     <img class="img-responsive" src="images/ipad-hand.png" alt="">
                 </div>
-                <!-- /col-lg-6 -->
 
             </div>
-            <!-- /row -->
         </div>
-        <!-- /container -->
     </div>
-    <!-- /headerwrap -->
 
-
-
-    <!--LOGIN FORM-->
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form name="login-form" id="login" class="login-form form-group" action="" method="post">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                        </button>
-                        <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
-                    </div>
-                    <div class="modal-wrapper">
-	                    <div class="user-icon"></div>
-	                    <div class="pass-icon"></div>
-	                    <div class="modal-body">
-	                        <div class="content">
-	                            <input name="username" type="text" class="input username" id="username" value="Username" onfocus="this.value=''" />
-	                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
-	                        </div>
-
-	                    </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title header" id="myModalLabel">Login or Register Here!</h4>
+                </div>
+                <div class="modal-wrapper">
+                    <div class="user-icon"></div>
+                    <div class="pass-icon"></div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <input name="username" type="text" class="input username" id="username" value="Username" onfocus="this.value=''" />
+                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
+                        </div>
 
                     </div>
-                                                                    <div class="modal-footer footer">
-                        <input type= "submit" name="submit" value="Login" class="button" />
-                        <input type="submit" name="submit" value="Register" class="register" />
-                    </div>
+                    <div id="messages"></div>
+
+                </div>
+                <div class="modal-footer footer">
+                    <input type="submit" name="submit" value="Login" class="button" />
+                    <input type="submit" name="submit" value="Register" class="register" />
+                </div>
             </form>
         </div>
     </div>
 
-
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/validator/dist/js/bootstrapValidator.js"></script>
     <script src="js/validator/dist/js/bootstrapValidator.min.js"></script>
-    
+
 </body>
 
 
