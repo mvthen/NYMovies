@@ -7,19 +7,36 @@ $(document).ready(function() {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         addUser(username, password);
+        //return $('#register').validate().form();
+        $('#registerModal').modal('hide');
     });
 
 
    $("#loginBtn").click(function (ev) {
-    return $('#login').validate().form();
+    //return $('#login').validate().form();
+    $('#loginModal').modal('hide');
     });
 
 
     function addUser(username, password) {
         var obj = {};
         obj[username] = password;
+        $.ajax({ 
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l",
+            type: "GET",
+            contentType: "application/json",
+            async: true,
+            timeout: 5000,
+            success: function (data) {
+                alert(data);
+            },
+            error: function (xhr, status, err) {
+                alert("asdas");
+            }
+        });
+
         $.ajax({
-                url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + api_key,
+                url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + api_key,
                 data: JSON.stringify(obj),
                 type: "POST",
                 contentType: "application/json",
@@ -27,7 +44,7 @@ $(document).ready(function() {
                     console.log(data);    
                 },
                 error: function(data, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    console.log(errorThrown);
                 }
         });
     }
