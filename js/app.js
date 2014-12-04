@@ -21,15 +21,19 @@ $(document).ready(function() {
     function addUser(username, password) {
         var obj = {};
 
-        
-        obj[username] = password;
+
+        obj["username"] = username;
+        obj["password"] = password;
         $.ajax({ 
             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l",
             type: "GET",
             contentType: "application/json",
             success: function (data) {
                 for (var item in data){
-                    console.log(data[item]);
+                    console.log(data[item]["username"]);
+                    if (username = data[item]["username"]){
+                        alert("That username is already being used");
+                    }
                 }
             },
             error: function (xhr, status, err) {
