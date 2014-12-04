@@ -20,18 +20,19 @@ $(document).ready(function() {
 
     function addUser(username, password) {
         var obj = {};
+
+        
         obj[username] = password;
         $.ajax({ 
             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l",
             type: "GET",
             contentType: "application/json",
-            async: true,
-            timeout: 5000,
             success: function (data) {
-                alert(data);
+                for (var item in data){
+                    console.log(data[item]);
+                }
             },
             error: function (xhr, status, err) {
-                alert("asdas");
             }
         });
 
@@ -44,7 +45,6 @@ $(document).ready(function() {
                     console.log(data);    
                 },
                 error: function(data, textStatus, errorThrown) {
-                    console.log(errorThrown);
                 }
         });
     }
