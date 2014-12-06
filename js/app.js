@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    // rotton tomatoes 
+    // username: uxperts
+    // password: uicoms4170
+    // 6czc3ebkafxvwceb68dhqnz2
+
+    var user = "";
+    var pw = "";
 
     var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
     var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
@@ -11,18 +18,55 @@ $(document).ready(function() {
             $('#registerModal').modal('hide');
         }
         else {
-            $("#registerMessages").append("<p id='#username_used'> Username already in use. </p>");
+            $("#register_valid").append("<p id='#username_used'> Username already in use. </p>");
         }
     });
 
-    $( "#usernameReg" ).keydown(function() {
-        $("#registerMessages").empty();
+    $( "#usernameReg").keydown(function() {
+        $("#register_valid").empty();
+    });
+
+    $( "#username").keydown(function() {
+        $("#login_valid").empty();
+    });
+
+    $( "#password").keydown(function() {
+        $("#login_valid").empty();
     });
 
    $("#loginBtn").click(function (ev) {
-    //return $('#login').validate().form();
-        $('#loginModal').modal('hide');
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (login(username, password)){
+            user = username;
+            pw = password;
+            $('#loginModal').modal('hide');
+
+        }
+        else {
+            $("#registerMessages").append("<p id='#incorrect_login'> Your username/password is incorrect. </p>");
+        }
     });
+
+
+   function login(username, password) {
+        $.ajax({ 
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey="+mongo_api_key,
+            type: "GET",
+            contentType: "application/json",
+            success: function (data) {
+                for (var item in data){
+                    console.log(data[item]["username"]);
+                    if (username == data[item]["username"] && password == data[item]["password"]){
+                        return true;
+                    }
+                }
+                return false;
+            },
+            error: function (xhr, status, err) {
+            }
+        });   
+   }
 
    $("#submitBtn").click(function(){
         search_filter(query);
