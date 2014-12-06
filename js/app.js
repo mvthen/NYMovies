@@ -28,6 +28,19 @@ $(document).ready(function() {
         getResults(search, query);
    });
 
+   $('.form_date').datetimepicker({
+        format: "mm/dd/yyyy",
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        endDate: "-1d",
+        startDate: "2004-01-01"
+    });
+
     function addUser(username, password) {
         var obj = {};
         obj["username"] = username;
@@ -78,7 +91,6 @@ $(document).ready(function() {
                         field: 'password',
                         message: 'The username and password can\'t be the same as each other'
                     }
-
                 }
             },
             password: {
@@ -90,11 +102,9 @@ $(document).ready(function() {
                         min: 4,
                         max: 30,
                         message: 'The password must be more than 3 and less than 30 characters long'
-
                     }
                 }
             }
-
         }
     });
 
@@ -115,7 +125,6 @@ $(document).ready(function() {
                         regexp: /^[a-zA-Z0-9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     } 
-
                 }
             },
             password: {
@@ -127,11 +136,9 @@ $(document).ready(function() {
                         min: 4,
                         max: 30,
                         message: 'The password must be more than 3 and less than 30 characters long'
-
                     }
                 }
             }
-
         }
     });
 
@@ -167,7 +174,7 @@ $(document).ready(function() {
 
         var message =
             $.ajax({
-                'url': "http://api.nytimes.com/svc/movies/v2/"+search_url+arg".json?api-key=" + nyt_api_key,
+                'url': "http://api.nytimes.com/svc/movies/v2/"+search_url+arg+".json?api-key=" + nyt_api_key,
 
                 'type': 'GET',
                 'dataType': "jsonp",
