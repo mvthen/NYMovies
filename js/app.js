@@ -278,28 +278,24 @@ $(document).ready(function() {
                     var poster_link = data['movies'][0]['posters']['thumbnail']
                         rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
                         (function( lockedInIndex ){
-                        console.log(query_data);
-                        var q = 'star wars';
-                        q.replace(' ', '+');  
-                        $.ajax({
-                            'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
-                            'type': 'GET',
-                            'dataType': 'jsonp',
-                            success: function(data, textStats, XMLHttpRequest){
-                                console.log(data)
+                            console.log(query_data);
+                            var q = 'star wars';
+                            q.replace(' ', '+');  
+                            $.ajax({
+                                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
+                                'type': 'GET',
+                                'dataType': 'jsonp',
+                                success: function(data, textStats, XMLHttpRequest){
+                                    console.log(data);
+                                    var poster_link = data['movies'][0]['posters']['thumbnail'];
+                                },
+                                error: function(data, textStatus, errorThrown) {
+                                    console.log("error");
+                                }
 
-                                var poster_link = data['movies'][0]['posters']['thumbnail']
-                            },
-                            error: function(data, textStatus, errorThrown) {
-                                console.log("error");
-                            }
-
-                        });
-
-                        })(query_data);
-    
-                    
-
+                            });
+                        })
+                        (query_data);
                     }
                 },
                 error: function(data, textStatus, errorThrown) {
