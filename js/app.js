@@ -58,6 +58,7 @@ $(document).ready(function() {
         }
     });
 
+   $("[name='switch-state']").bootstrapSwitch();
 
    function login(username, password) {
         $.ajax({ 
@@ -269,7 +270,7 @@ $(document).ready(function() {
             rt_apikey = 
             //rottentomatoes ajax call for poster
             $.ajax({
-                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='++'&q='+q,
+                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+'&q='+q,
                 'type': 'GET',
                 'dataType': 'jsonp',
                 success: function(data, textStats, XMLHttpRequest){
