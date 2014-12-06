@@ -150,14 +150,14 @@ $(document).ready(function() {
             }
         }
         
-        if (search_type == "critic_pick") {
-            search_url = "reviews/all";
-            arg = "";
-        }
-        if (search_type == "reviewer") {
-            search_url = "reviewer/";
-            arg = query;
-        }
+        // if (search_type == "critic_pick") {
+        //     search_url = "reviews/all";
+        //     arg = "";
+        // }
+        // if (search_type == "reviewer") {
+        //     search_url = "reviewer/";
+        //     arg = query;
+        // }
         // if (search_type == "") {
         //     arg = query;
         //     query = query.replace("://", "%3A%2F%2F").replace("/", "%2F");
