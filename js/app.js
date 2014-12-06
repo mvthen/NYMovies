@@ -201,33 +201,7 @@ $(document).ready(function() {
     });
 
     function search_filter(query) {
-        // var queries = query[0];
-        // var reviewer = query[1];
-        // var opening_date = query[2];
-        // var pub_date = query[3];
-        // var dvd = query[4];
-        // var thousand_best = query[5];
-        // var critic_pick = query[6];
-        
-        // for (var i = 0; i<query.length; i++) {
-        //     if (query[i] = "") {
 
-        //     }
-        // }
-        
-        // if (search_type == "critic_pick") {
-        //     search_url = "reviews/all";
-        //     arg = "";
-        // }
-        // if (search_type == "reviewer") {
-        //     search_url = "reviewer/";
-        //     arg = query;
-        // }
-        // if (search_type == "") {
-        //     arg = query;
-        //     query = query.replace("://", "%3A%2F%2F").replace("/", "%2F");
-        //     search_url = "url/exact-match.jsonp?url=" + query + "&api-key=";
-        // }
         var search_url = ''
 
         //construct query url
@@ -249,7 +223,7 @@ $(document).ready(function() {
             }
         }
 
-        console.log(search_url)
+        //console.log(search_url)
 
         var message =
             $.ajax({
@@ -259,15 +233,18 @@ $(document).ready(function() {
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
                     // display_first(data, search_type, arg);
-                    console.log(data);
+                    //console.log(data);
 
-                    for (var i = 0; i <10; i++){
+                    for (var i = 0; i < data['results'].length; i++){
                         //will print first 10 search results
 
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of ','');
                         var opening_date = data['results'][i]['opening_date']
                         var mpaa_rating = data['results'][i]['mpaa_rating']
+                        var article_link = data['results'][i]['link']['url']
+                        var article_title = data['results'][i]['link']['suggested_link_text']
+
 
 
                     }
