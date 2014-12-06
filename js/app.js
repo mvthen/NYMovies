@@ -253,6 +253,9 @@ $(document).ready(function() {
     }
 
     function reviewer_details(reviewer) {
+        reviewer = reviewer.replace(' ','-');
+        reviewer = reviewer.replace('.-','.');
+
         var message =
             $.ajax({
                 'url': "http://api.nytimes.com/svc/movies/v2/critics/"+reviewer+".json?api-key="+ nyt_api_key,
