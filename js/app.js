@@ -105,6 +105,12 @@ $(document).ready(function() {
         var min_date = document.getElementById('mindate').value;
         var reviewer_name = document.getElementById('reviewer_name').value;
 
+        var type = $('[data-switch-get]').data('switch-get');
+        var critic_pick = $('#switch-' + type).bootstrapSwitch(type)
+
+        var type2 = $('[data-switch-get]').data('switch-get');
+        var top_thousand = $('#switch-' + type2).bootstrapSwitch(type2)
+
         var query_info = {}
         query_text = query_text.replace(' ', '+');
         query_info["query"] = query_text;
@@ -114,6 +120,9 @@ $(document).ready(function() {
         reviewer_name = reviewer_name.replace(' ', '-');
         reviewer_name = reviewer_name.replace('.-', '.');
         query_info["reviewer_name"] = reviewer_name;
+
+        query_info['critic_pick'] = critic_pick
+        query_info['top_thousand'] = top_thousand
 
         search_filter(query_info);
     });
