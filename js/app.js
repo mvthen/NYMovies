@@ -25,7 +25,7 @@ $(document).ready(function() {
     });
 
    $("#submitBtn").click(function(){
-        getResults(search, query);
+        search_filter(query);
    });
 
    $('.form_date').datetimepicker({
@@ -174,13 +174,24 @@ $(document).ready(function() {
 
         var message =
             $.ajax({
-                'url': "http://api.nytimes.com/svc/movies/v2/"+search_url+arg+".json?api-key=" + nyt_api_key,
+                'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?"+search_url+arg"&api-key=" + nyt_api_key,
 
                 'type': 'GET',
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
                     // display_first(data, search_type, arg);
                     console.log(data);
+
+                    for (var i = 0; i <10; i++){
+                        //will print first 10 search results
+
+                        var movie_title = data['results'][i]['link']['suggested_link_text'];
+                        movie_title = movie_title.replace('Read the New York Times Review of ','');
+                        var opening_date = data['results'][i]['opening_date']
+                        var mpaa_rating = data['results'][i]['mpaa_rating']
+
+
+                    }
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log("error");
