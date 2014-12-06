@@ -15,13 +15,20 @@ $(document).ready(function() {
         }
     });
 
+<<<<<<< Updated upstream
     $( "#usernameReg" ).keydown(function() {
         $("#registerMessages").empty();
+=======
+
+   $("#loginBtn").click(function (ev) {
+    //return $('#login').validate().form();
+        $('#loginModal').modal('hide');
+>>>>>>> Stashed changes
     });
 
 <<<<<<< Updated upstream
    $("#submitBtn").click(function(){
-        getResults();
+        getResults(search, query);
    });
 
 =======
@@ -133,7 +140,7 @@ $(document).ready(function() {
         }
     });
 
-    function search_filter(search_type, query) {
+    function search_filter(query) {
         var queries = query[0];
         var reviewer = query[1];
         var opening_date = query[2];
