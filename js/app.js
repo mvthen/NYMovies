@@ -15,24 +15,19 @@ $(document).ready(function() {
         }
     });
 
-<<<<<<< Updated upstream
     $( "#usernameReg" ).keydown(function() {
         $("#registerMessages").empty();
-=======
+    });
 
    $("#loginBtn").click(function (ev) {
     //return $('#login').validate().form();
         $('#loginModal').modal('hide');
->>>>>>> Stashed changes
     });
 
-<<<<<<< Updated upstream
    $("#submitBtn").click(function(){
         getResults(search, query);
    });
 
-=======
->>>>>>> Stashed changes
     function addUser(username, password) {
         var obj = {};
         obj["username"] = username;
