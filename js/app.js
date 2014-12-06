@@ -298,8 +298,7 @@ $(document).ready(function() {
 
                         })(query_data);
     
-                        
->>>>>>> Stashed changes
+                    
 
                     }
                 },
