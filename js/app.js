@@ -259,6 +259,23 @@ $(document).ready(function() {
                     console.log("error");
                 }
             });
+
+            var q = movie_title;
+            q.replace(' ', '+');  
+            rt_apikey = 
+            //rottentomatoes ajax call for poster
+            $.ajax({
+                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='++'&q='+q,
+                'type': 'GET',
+                'dataType': 'jsonp',
+                success: function(data, textStats, XMLHttpRequest){
+
+                },
+                error: function(data, textStatus, errorThrown) {
+                    console.log("error");
+                }
+
+            });
     }
 
     function reviewer_details(reviewer) {
