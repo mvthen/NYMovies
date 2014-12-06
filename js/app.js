@@ -28,6 +28,10 @@ $(document).ready(function() {
         }
     });
 
+    $('a#button-checkbox').click(function(){
+        $(this).toggleClass("down");
+    });
+
     $( "#usernameReg").keydown(function() {
         $("#register_valid").empty();
     });

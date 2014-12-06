@@ -58,14 +58,14 @@
             <h1>Find Movie Ratings <h2>powered by NY Times </h2></h1>
             <form id="search_queries">
                 <div class="no-padding">
-                    <div class="query-search form-group no-padding">
+                    <div class="form-format form-group no-padding">
                         <div class="input-group">
                           <!-- <label class="sr-only" for="exampleInputEmail2">Email address</label> -->
                           <div class="input-group-addon">Query</div>
                           <input type="text" class="form-control" id="query" placeholder="Enter a search term">
                         </div>
                     </div>
-                    <div class="calendar no-padding">
+                    <div class="form-format calendar no-padding">
                         <div class="input-group date form_date no-padding" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                             <div class="input-group-addon">Opening Date</div>
                             <input class="form-control" id="mindate" size="16" type="text" value="" readonly placeholder="Pick a date">
@@ -73,11 +73,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                      <!-- <label class="sr-only" for="exampleInputEmail2">Email address</label> -->
-                      <div class="input-group-addon">Reviewer</div>
-                      <input type="text" class="form-control" id="reviewer_name" placeholder="Enter reviewer name">
+                <div class="no-padding">
+                    <div class="form-format form-group">
+                        <div class="input-group">
+                          <!-- <label class="sr-only" for="exampleInputEmail2">Email address</label> -->
+                          <div class="input-group-addon">Reviewer</div>
+                          <input type="text" class="form-control" id="reviewer_name" placeholder="Enter reviewer name">
+                        </div>
+                    </div>
+                    <div class="form-format checkbox-container no-padding">
+                        <!-- <label class="checkbox-inline">
+                          <input type="checkbox" id="inlineCheckbox1" value="option1"> Critic's Pick
+                        </label> -->
+                        <div class = "checkbox-btn"> <a id="button-checkbox" title="button">Critic's Pick</a> </div>
+                        <div class = "checkbox-btn"><a id="button-checkbox" title="button">Top Thousand</a> </div>
+
+                        <!-- <label class="checkbox-inline">
+                          <input type="checkbox" id="inlineCheckbox2" value="option2"> Top Thousand
+                        </label> -->
                     </div>
                 </div>
             </form>
