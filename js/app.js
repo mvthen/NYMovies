@@ -7,25 +7,27 @@ $(document).ready(function() {
     $("#registerBtn").click(function(event) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        addUser(username, password);
-        //return $('#register').validate().form();
-        $('#registerModal').modal('hide');
+        if (addUser(username, password)){
+            $('#registerModal').modal('hide');
+        }
+        else {
+            $("#registerMessages").append("<p id='#username_used'> Username already in use. </p>");
+        }
     });
 
-
-   $("#loginBtn").click(function (ev) {
-    //return $('#login').validate().form();
-    $('#loginModal').modal('hide');
+    $( "#usernameReg" ).keydown(function() {
+        $("#registerMessages").empty();
     });
 
+<<<<<<< Updated upstream
    $("#submitBtn").click(function(){
         getResults();
    });
 
+=======
+>>>>>>> Stashed changes
     function addUser(username, password) {
         var obj = {};
-
-
         obj["username"] = username;
         obj["password"] = password;
         $.ajax({ 
@@ -36,7 +38,7 @@ $(document).ready(function() {
                 for (var item in data){
                     console.log(data[item]["username"]);
                     if (username = data[item]["username"]){
-                        alert("That username is already being used");
+                        return false;
                     }
                 }
             },
@@ -69,10 +71,6 @@ $(document).ready(function() {
                         min: 6,
                         max: 30,
                         message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
                     },
                     different: {
                         field: 'password',
