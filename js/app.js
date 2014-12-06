@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 
     $("#results").hide();
-    
+
     var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
     var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
 
@@ -20,84 +20,81 @@ $(document).ready(function() {
     $("#registerBtn").click(function(event) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        if (addUser(username, password)){
+        if (addUser(username, password)) {
             $('#registerModal').modal('hide');
-        }
-        else {
+        } else {
             $("#register_valid").append("<p id='#username_used'> Username already in use. </p>");
         }
     });
 
-    $('a#button-checkbox').click(function(){
+    $('a#button-checkbox').click(function() {
         $(this).toggleClass("down");
     });
 
-    $( "#usernameReg").keydown(function() {
+    $("#usernameReg").keydown(function() {
         $("#register_valid").empty();
     });
 
-    $( "#username").keydown(function() {
+    $("#username").keydown(function() {
         $("#login_valid").empty();
     });
 
-    $( "#password").keydown(function() {
+    $("#password").keydown(function() {
         $("#login_valid").empty();
     });
 
-   $("#loginBtn").click(function (ev) {
+    $("#loginBtn").click(function(ev) {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        if (login(username, password)){
+        if (login(username, password)) {
             user = username;
             pw = password;
             $('#loginModal').modal('hide');
 
-        }
-        else {
+        } else {
             $("#registerMessages").append("<p id='#incorrect_login'> Your username/password is incorrect. </p>");
         }
     });
 
-   $("[name='switch-state']").bootstrapSwitch();
+    $("[name='switch-state']").bootstrapSwitch();
 
-   function login(username, password) {
-        $.ajax({ 
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey="+mongo_api_key,
+    function login(username, password) {
+        $.ajax({
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
             type: "GET",
             contentType: "application/json",
-            success: function (data) {
-                for (var item in data){
+            success: function(data) {
+                for (var item in data) {
                     console.log(data[item]["username"]);
-                    if (username == data[item]["username"] && password == data[item]["password"]){
+                    if (username == data[item]["username"] && password == data[item]["password"]) {
                         return true;
                     }
                 }
                 return false;
             },
-            error: function (xhr, status, err) {
-            }
-        });   
-   }
+            error: function(xhr, status, err) {}
+        });
+    }
 
-   $("#submitBtn").click(function(){
+    $("#submitBtn").click(function() {
         var query_text = document.getElementById('query').value;
         var min_date = document.getElementById('mindate').value;
         var reviewer_name = document.getElementById('reviewer_name').value;
 
         var query_info = {}
-        query_text = query_text.replace(' ','+');
+        query_text = query_text.replace(' ', '+');
         query_info["query"] = query_text;
 
         query_info["min_date"] = min_date;
 
-        reviewer_name = reviewer_name.replace(' ','-');
-        reviewer_name = reviewer_name.replace('.-','.');
+        reviewer_name = reviewer_name.replace(' ', '-');
+        reviewer_name = reviewer_name.replace('.-', '.');
         query_info["reviewer_name"] = reviewer_name;
 
         search_filter(query_info);
-   });
+    });
 
-   $('.form_date').datetimepicker({
+    $('.form_date').datetimepicker({
         format: "mm/dd/yyyy",
         weekStart: 1,
         todayBtn: 1,
@@ -114,32 +111,30 @@ $(document).ready(function() {
         var obj = {};
         obj["username"] = username;
         obj["password"] = password;
-        $.ajax({ 
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey="+mongo_api_key,
+        $.ajax({
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
             type: "GET",
             contentType: "application/json",
-            success: function (data) {
-                for (var item in data){
+            success: function(data) {
+                for (var item in data) {
                     console.log(data[item]["username"]);
-                    if (username = data[item]["username"]){
+                    if (username = data[item]["username"]) {
                         return false;
                     }
                 }
             },
-            error: function (xhr, status, err) {
-            }
+            error: function(xhr, status, err) {}
         });
 
         $.ajax({
-                url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
-                data: JSON.stringify(obj),
-                type: "POST",
-                contentType: "application/json",
-                success: function(data, textStats, XMLHttpRequest) {
-                    console.log(data);    
-                },
-                error: function(data, textStatus, errorThrown) {
-                }
+            url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
+            data: JSON.stringify(obj),
+            type: "POST",
+            contentType: "application/json",
+            success: function(data, textStats, XMLHttpRequest) {
+                console.log(data);
+            },
+            error: function(data, textStatus, errorThrown) {}
         });
     }
 
@@ -193,7 +188,7 @@ $(document).ready(function() {
                     regexp: {
                         regexp: /^[a-zA-Z0-9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    } 
+                    }
                 }
             },
             password: {
@@ -216,21 +211,21 @@ $(document).ready(function() {
         var search_url = ''
 
         //construct query url
-        if (query['query']){
-            search_url += 'query='+query['query']
+        if (query['query']) {
+            search_url += 'query=' + query['query']
         }
-        if (query['reviewer_name']){
-            if (search_url.length != 0){
+        if (query['reviewer_name']) {
+            if (search_url.length != 0) {
                 search_url += '&reviewer=' + query['reviewer_name']
             } else {
                 search_url += 'reviewer=' + query['reviewer_name']
             }
         }
-        if (query['min_date']){
-            if (search_url !=0){
-                search_url +='&opening_date=' + query['min_date']
-            }else{
-                search_url +='opening_date=' + query['min_date']
+        if (query['min_date']) {
+            if (search_url != 0) {
+                search_url += '&opening_date=' + query['min_date']
+            } else {
+                search_url += 'opening_date=' + query['min_date']
             }
         }
 
@@ -238,7 +233,7 @@ $(document).ready(function() {
 
         var message =
             $.ajax({
-                'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?"+search_url+"&api-key=" + nyt_api_key,
+                'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?" + search_url + "&api-key=" + nyt_api_key,
 
                 'type': 'GET',
                 'dataType': "jsonp",
@@ -246,17 +241,61 @@ $(document).ready(function() {
                     // display_first(data, search_type, arg);
                     console.log(data);
 
-                    for (var i = 0; i < data['results'].length; i++){
+                    for (var i = 0; i < data['results'].length; i++) {
                         //will print first 10 search results
-                        var query_data = [];
-                        query_data.push("1");
+                        var query_data = {};
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
-                        movie_title = movie_title.replace('Read the New York Times Review of ','');
-                        var opening_date = data['results'][i]['opening_date'];
-                        var mpaa_rating = data['results'][i]['mpaa_rating'];
-                        var article_link = data['results'][i]['link']['url'];
-                        var article_title = data['results'][i]['link']['suggested_link_text'];
+                        movie_title = movie_title.replace('Read the New York Times Review of ', '');
+                        query_data["movie_title"] = data['results'][i]['link']['suggested_link_text'].replace(" ", "+");
 
+                        var opening_date = data['results'][i]['opening_date'];
+                        query_data["opening_date"] = opening_date;
+
+                        var mpaa_rating = data['results'][i]['mpaa_rating'];
+                        query_data["mpaa_rating"] = mpaa_rating;
+                        var article_link = data['results'][i]['link']['url'];
+                        query_data["article_link"] = article_link;
+                        var article_title = data['results'][i]['link']['suggested_link_text'];
+                        query_data["article_title"] = article_title;
+                        rt_apikey = '6czc3ebkafxvwceb68dhqnz2'
+                            //rottentomatoes ajax call for poster
+                        $.ajax({
+                            'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=' + rt_apikey + '&q=' + q,
+                            'type': 'GET',
+                            'dataType': 'jsonp',
+                            success: function(data, textStats, XMLHttpRequest) {
+                                //console.log(data)
+
+                                var poster_link = data['movies'][0]['posters']['thumbnail'];
+                                rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
+                                (function(lockedInIndex) {
+                                    console.log(query_data);
+
+                                    var q = query_data["movie_title"];
+                                    q.replace(' ', '+');
+                                    $.ajax({
+                                        'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=' + rt_apikey + '&q=' + q,
+                                        'type': 'GET',
+                                        'dataType': 'jsonp',
+                                        success: function(data, textStats, XMLHttpRequest) {
+                                            console.log(data)
+
+                                            var poster_link = data['movies'][0]['posters']['thumbnail'];
+                                        },
+                                        error: function(data, textStatus, errorThrown) {
+                                            console.log("error");
+                                        }
+
+                                    });
+
+                                })(query_data);
+
+
+                            },
+                            error: function(data, textStatus, errorThrown) {
+                                console.log("error");
+                            }
+                        });
                     }
                 },
                 error: function(data, textStatus, errorThrown) {
@@ -264,46 +303,7 @@ $(document).ready(function() {
                 }
             });
 
-            var q = 'star wars';
-            q.replace(' ', '+');  
-            rt_apikey = '6czc3ebkafxvwceb68dhqnz2'
-            //rottentomatoes ajax call for poster
-            $.ajax({
-                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
-                'type': 'GET',
-                'dataType': 'jsonp',
-                success: function(data, textStats, XMLHttpRequest){
-                    //console.log(data)
 
-                    var poster_link = data['movies'][0]['posters']['thumbnail']
-                        rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
-                        (function( lockedInIndex ){
-                        console.log(query_data);
-                        var q = 'star wars';
-                        q.replace(' ', '+');  
-                        $.ajax({
-                            'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
-                            'type': 'GET',
-                            'dataType': 'jsonp',
-                            success: function(data, textStats, XMLHttpRequest){
-                                console.log(data)
-
-                                var poster_link = data['movies'][0]['posters']['thumbnail']
-                            },
-                            error: function(data, textStatus, errorThrown) {
-                                console.log("error");
-                            }
-
-                        });
-
-                        })(query_data);
-    
-                    
-                },
-                error: function(data, textStatus, errorThrown) {
-                    console.log("error");
-                }
-            });
     }
 
     function reviewer_details(reviewer) {
@@ -311,7 +311,7 @@ $(document).ready(function() {
 
         var message =
             $.ajax({
-                'url': "http://api.nytimes.com/svc/movies/v2/critics/"+reviewer+".json?api-key="+ nyt_api_key,
+                'url': "http://api.nytimes.com/svc/movies/v2/critics/" + reviewer + ".json?api-key=" + nyt_api_key,
 
                 'type': 'GET',
                 'dataType': "jsonp",
