@@ -9,6 +9,24 @@ $(document).ready(function() {
     var pw = "";
     var rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
 
+    
+    String.format = function() {
+        // The string containing the format items (e.g. "{0}")
+        // will and always has to be the first argument.
+        var theString = arguments[0];
+        
+        // start with the second argument (i = 1)
+        for (var i = 1; i < arguments.length; i++) {
+            // "gm" = RegEx options for Global search (more than one instance)
+            // and for Multiline search
+            var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
+            theString = theString.replace(regEx, arguments[i]);
+        }
+        
+        return theString;
+    }
+
+
 
         $.ajax({
             'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
@@ -16,6 +34,11 @@ $(document).ready(function() {
             'dataType': 'jsonp',
             success: function(data, textStats, XMLHttpRequest) {
                 console.log(data);
+                for (var i = 0; i < 15; i++){
+                    var picture = String.format("<div class=\"item\"><img src=\"{0}\" alt=\"Owl Image\"></div>", data["movies"][i]["posters"]["detailed"]);
+                    console.log(picture);
+                    $("#owl-demo").append(picture);
+                }
             },
             error: function(data, textStatus, errorThrown) {
                 console.log("error");
@@ -27,7 +50,6 @@ $(document).ready(function() {
 
     var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
     var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
-
 
 
     $("#registerBtn").click(function(event) {
