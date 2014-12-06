@@ -69,6 +69,15 @@ $(document).ready(function() {
    }
 
    $("#submitBtn").click(function(){
+        var query_text = document.getElementById('query').value;
+        var min_date = document.getElementById('mindate').value;
+        var reviewer_name = document.getElementById('reviewer_name').value;
+
+        var query = {}
+        query_info["query"] = query_text;
+        query_info["min_date"] = min_date;
+        query_info["reviewer_name"] = reviewer_name;
+
         search_filter(query);
    });
 
