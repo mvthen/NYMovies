@@ -257,6 +257,7 @@ $(document).ready(function() {
                         var article_link = data['results'][i]['link']['url']
                         var article_title = data['results'][i]['link']['suggested_link_text']
 
+<<<<<<< Updated upstream
                     }
                 },
                 error: function(data, textStatus, errorThrown) {
@@ -269,13 +270,18 @@ $(document).ready(function() {
             rt_apikey = '6czc3ebkafxvwceb68dhqnz2'
             //rottentomatoes ajax call for poster
             $.ajax({
+<<<<<<< HEAD
+                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+'&q='+q,
+=======
                 'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
+>>>>>>> 1a65a6c578c1e07128054eb9099f7274a92ea8c5
                 'type': 'GET',
                 'dataType': 'jsonp',
                 success: function(data, textStats, XMLHttpRequest){
                     //console.log(data)
 
                     var poster_link = data['movies'][0]['posters']['thumbnail']
+=======
                         rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
                         (function( lockedInIndex ){
                         console.log(query_data);
