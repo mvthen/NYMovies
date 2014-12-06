@@ -8,8 +8,14 @@ $(document).ready(function() {
     var user = "";
     var pw = "";
 
+
+
+    $("#results").hide();
+    
     var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
     var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
+
+
 
     $("#registerBtn").click(function(event) {
         var username = document.getElementById('username').value;
