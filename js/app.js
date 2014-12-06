@@ -71,6 +71,17 @@ $(document).ready(function() {
 
     $("[name='switch-state']").bootstrapSwitch();
 
+     $("#owl-demo").owlCarousel({
+ 
+      autoPlay: 2000, //Set AutoPlay to 3 seconds
+      items : 4,
+      itemsDesktop : [1199,3],
+      itemsDesktopSmall : [979,3],
+      navigation: true,
+      navigationText: ["<", ">"]
+ 
+  });
+
     function login(username, password) {
         $.ajax({
             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,

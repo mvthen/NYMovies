@@ -2,9 +2,15 @@
 	margin-left: 20px;
 }
 
+.navbar {
+	height:50px;
+}
 
 #headerwrap {
 	height:100vh;
+	width:100%;
+	margin:0;
+	padding:0;
 }
 
 .logo {
@@ -14,6 +20,23 @@
 
 .no-padding {
     padding: 0;
+}
+
+#owl-demo .item{
+  margin: 10px;
+}
+
+#owl-demo .item img{
+	margin-top: 70px;
+  	display: block;
+  	width: 100%;
+  	height: auto;
+}
+
+#owl-spacing {}
+
+.center-page {
+    margin: auto;
 }
 
 .form-group {
@@ -64,27 +87,3 @@
 #critic {
 	border-right: 1px solid #cccccc;
 }
-
-/*#button-checkbox {
-	text-align: center;
-	vertical-align: middle;
-	width: 50%;
-	height:100%;
-	float:left;
-	border-radius: 4px;
-    background: #eeeeee;
-    cursor: pointer;
-    line-height:1;
-    padding: 6px 12px;
-    font-size:14px;   
-    font-weight: normal;
-    color: #555555;        
-    }
-
-#button-checkbox.down {
-    background: #bbb;
-    /*border-top: solid 2px #777;
-    border-left: solid 2px #777;
-    border-bottom:solid 2px  #eaeaea;
-    border-right: solid 2px #eaeaea;*/
-    }*/
