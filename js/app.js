@@ -7,7 +7,20 @@ $(document).ready(function() {
 
     var user = "";
     var pw = "";
+    var rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
 
+
+        $.ajax({
+            'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
+            'type': 'GET',
+            'dataType': 'jsonp',
+            success: function(data, textStats, XMLHttpRequest) {
+                console.log(data);
+            },
+            error: function(data, textStatus, errorThrown) {
+                console.log("error");
+            }
+        });
 
 
     $("#results").hide();
@@ -229,8 +242,6 @@ $(document).ready(function() {
             }
         }
 
-        //console.log(search_url)
-
         var message =
             $.ajax({
                 'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?" + search_url + "&api-key=" + nyt_api_key,
@@ -257,7 +268,6 @@ $(document).ready(function() {
                         query_data["article_link"] = article_link;
                         var article_title = data['results'][i]['link']['suggested_link_text'];
                         query_data["article_title"] = article_title;
-                        rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
                         //rottentomatoes ajax call for poster
                         (function(lockedInIndex) {
                         $.ajax({
@@ -265,10 +275,7 @@ $(document).ready(function() {
                             'type': 'GET',
                             'dataType': 'jsonp',
                             success: function(data, textStats, XMLHttpRequest) {
-                                console.log(data)
-
-
-
+                                console.log(data);
                             },
                             error: function(data, textStatus, errorThrown) {
                                 console.log("error");
@@ -287,8 +294,6 @@ $(document).ready(function() {
     }
 
     function reviewer_details(reviewer) {
-
-
         var message =
             $.ajax({
                 'url': "http://api.nytimes.com/svc/movies/v2/critics/" + reviewer + ".json?api-key=" + nyt_api_key,
