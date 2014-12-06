@@ -79,12 +79,17 @@ $(document).ready(function() {
         var min_date = document.getElementById('mindate').value;
         var reviewer_name = document.getElementById('reviewer_name').value;
 
-        var query = {}
+        var query_info = {}
+        query_text = query_text.replace(' ','+');
         query_info["query"] = query_text;
+
         query_info["min_date"] = min_date;
+
+        reviewer_name = reviewer_name.replace(' ','-');
+        reviewer_name = reviewer_name.replace('.-','.');
         query_info["reviewer_name"] = reviewer_name;
 
-        search_filter(query);
+        search_filter(query_info);
    });
 
    $('.form_date').datetimepicker({
@@ -202,52 +207,50 @@ $(document).ready(function() {
     });
 
     function search_filter(query) {
-        var queries = query[0];
-        var reviewer = query[1];
-        var opening_date = query[2];
-        var pub_date = query[3];
-        var dvd = query[4];
-        var thousand_best = query[5];
-        var critic_pick = query[6];
-        
-        for (var i = 0; i<query.length; i++) {
-            if (query[i] = "") {
 
+        var search_url = ''
+
+        //construct query url
+        if (query['query']){
+            search_url += 'query='+query['query']
+        }
+        if (query['reviewer_name']){
+            if (search_url.length != 0){
+                search_url += '&reviewer=' + query['reviewer_name']
+            } else {
+                search_url += 'reviewer=' + query['reviewer_name']
             }
         }
-        
-        // if (search_type == "critic_pick") {
-        //     search_url = "reviews/all";
-        //     arg = "";
-        // }
-        // if (search_type == "reviewer") {
-        //     search_url = "reviewer/";
-        //     arg = query;
-        // }
-        // if (search_type == "") {
-        //     arg = query;
-        //     query = query.replace("://", "%3A%2F%2F").replace("/", "%2F");
-        //     search_url = "url/exact-match.jsonp?url=" + query + "&api-key=";
-        // }
+        if (query['min_date']){
+            if (search_url !=0){
+                search_url +='&opening_date=' + query['min_date']
+            }else{
+                search_url +='opening_date=' + query['min_date']
+            }
+        }
 
+        //console.log(search_url)
 
         var message =
             $.ajax({
-                'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?"+search_url+arg"&api-key=" + nyt_api_key,
+                'url': "http://api.nytimes.com/svc/movies/v2/reviews/search.jsonp?"+search_url+"&api-key=" + nyt_api_key,
 
                 'type': 'GET',
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
                     // display_first(data, search_type, arg);
-                    console.log(data);
+                    //console.log(data);
 
-                    for (var i = 0; i <10; i++){
+                    for (var i = 0; i < data['results'].length; i++){
                         //will print first 10 search results
 
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of ','');
                         var opening_date = data['results'][i]['opening_date']
                         var mpaa_rating = data['results'][i]['mpaa_rating']
+                        var article_link = data['results'][i]['link']['url']
+                        var article_title = data['results'][i]['link']['suggested_link_text']
+
 
 
                     }
@@ -259,8 +262,7 @@ $(document).ready(function() {
     }
 
     function reviewer_details(reviewer) {
-        reviewer = reviewer.replace(' ','-');
-        reviewer = reviewer.replace('.-','.');
+
 
         var message =
             $.ajax({
