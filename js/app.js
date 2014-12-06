@@ -252,10 +252,10 @@ $(document).ready(function() {
                         query_data.push("1");
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of ','');
-                        var opening_date = data['results'][i]['opening_date']
-                        var mpaa_rating = data['results'][i]['mpaa_rating']
-                        var article_link = data['results'][i]['link']['url']
-                        var article_title = data['results'][i]['link']['suggested_link_text']
+                        var opening_date = data['results'][i]['opening_date'];
+                        var mpaa_rating = data['results'][i]['mpaa_rating'];
+                        var article_link = data['results'][i]['link']['url'];
+                        var article_title = data['results'][i]['link']['suggested_link_text'];
 
                     }
                 },
@@ -278,25 +278,27 @@ $(document).ready(function() {
                     var poster_link = data['movies'][0]['posters']['thumbnail']
                         rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
                         (function( lockedInIndex ){
-                            console.log(query_data);
-                            var q = 'star wars';
-                            q.replace(' ', '+');  
-                            $.ajax({
-                                'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
-                                'type': 'GET',
-                                'dataType': 'jsonp',
-                                success: function(data, textStats, XMLHttpRequest){
-                                    console.log(data);
-                                    var poster_link = data['movies'][0]['posters']['thumbnail'];
-                                },
-                                error: function(data, textStatus, errorThrown) {
-                                    console.log("error");
-                                }
+                        console.log(query_data);
+                        var q = 'star wars';
+                        q.replace(' ', '+');  
+                        $.ajax({
+                            'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey='+rt_apikey+'&q='+q,
+                            'type': 'GET',
+                            'dataType': 'jsonp',
+                            success: function(data, textStats, XMLHttpRequest){
+                                console.log(data)
 
-                            });
-                        })
-                        (query_data);
-                    }
+                                var poster_link = data['movies'][0]['posters']['thumbnail']
+                            },
+                            error: function(data, textStatus, errorThrown) {
+                                console.log("error");
+                            }
+
+                        });
+
+                        })(query_data);
+    
+                    
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log("error");
