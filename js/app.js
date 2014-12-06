@@ -252,10 +252,10 @@ $(document).ready(function() {
                         query_data.push("1");
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of ','');
-                        var opening_date = data['results'][i]['opening_date']
-                        var mpaa_rating = data['results'][i]['mpaa_rating']
-                        var article_link = data['results'][i]['link']['url']
-                        var article_title = data['results'][i]['link']['suggested_link_text']
+                        var opening_date = data['results'][i]['opening_date'];
+                        var mpaa_rating = data['results'][i]['mpaa_rating'];
+                        var article_link = data['results'][i]['link']['url'];
+                        var article_title = data['results'][i]['link']['suggested_link_text'];
 
                     }
                 },
@@ -299,8 +299,6 @@ $(document).ready(function() {
                         })(query_data);
     
                     
-
-                    }
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log("error");
