@@ -18,6 +18,9 @@ $(document).ready(function() {
     $('#loginModal').modal('hide');
     });
 
+   $("#submitBtn").click(function(){
+        getResults();
+   });
 
     function addUser(username, password) {
         var obj = {};
