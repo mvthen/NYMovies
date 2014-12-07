@@ -37,8 +37,6 @@
   	height: auto;
 }
 
-#owl-spacing {}
-
 .center-page {
     margin: auto;
 }
@@ -69,6 +67,36 @@
 .results {
 	margin-top: 60px;
 }
+
+.thumb{
+	width:270px;
+	height:367px;
+	margin-bottom: 10px;
+}
+
+.thumbnail {
+	height:367px;
+	width:100%;
+}
+
+.text, .text-js {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    margin-left: -4px;
+    width: 238px;
+    background: #999;
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color:#3498db;
+}
+
+.thumb:hover .text {
+    display: block
+}
+
 
 .switch-box {
 	text-align: left;

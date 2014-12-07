@@ -346,16 +346,15 @@ $(document).ready(function() {
                             'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=short&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
-                            success: function(data, textStats, XMLHttpRequest) {
-                                
+                            success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
                                 if (poster !== "N/A" && poster !== undefined){
-                                    var img = String.format("<img class='img-responsive' src='{0}' alt=''>", data["Poster"]);
+                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", data["Poster"], data["Title"]);
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='#'>{0}</a></div>", img);
                                     $("#posters").append(total);
                                 }
                                 else {
-                                    console.log("no poster");
+                                    console.log(data);
                                 }
                             },
                             error: function(data, textStatus, errorThrown) {
@@ -370,8 +369,6 @@ $(document).ready(function() {
                     console.log("error");
                 }
             });
-
-
     }
 
     function reviewer_details(reviewer) {
