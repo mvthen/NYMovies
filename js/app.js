@@ -37,7 +37,7 @@ $(document).ready(function() {
                 for (var i = 0; i < 15; i++){
                     var picture = String.format("<div class=\"owl-item\"><img src=\"{0}\" alt=\"Owl Image\" style='width: 342px;'></div>", data["movies"][i]["posters"]["detailed"]);
                     console.log(picture);
-                    $(".owl-wrapper").append(picture);
+                    //$(".owl-wrapper").prepend(picture);
                 }
             },
             error: function(data, textStatus, errorThrown) {
@@ -293,7 +293,7 @@ $(document).ready(function() {
                 success: function(data, textStats, XMLHttpRequest) {
                     // display_first(data, search_type, arg);
                     //console.log(data);
-
+                    var search_data = data;
                     for (var i = 0; i < data['results'].length; i++) {
                         //will print first 10 search results
                         var query_data = {};
@@ -317,13 +317,17 @@ $(document).ready(function() {
                             'type': 'GET',
                             'dataType': 'jsonp',
                             success: function(data, textStats, XMLHttpRequest) {
-                                console.log(data);
+                                //console.log(search_data);
+                                for (var i = 0; i < data.length; i++){
+                                    console.log(data);
+
+                                }
                             },
                             error: function(data, textStatus, errorThrown) {
                                 console.log("error");
                             }
                         });
-                    })(query_data);
+                    })(search_data);
 
                     }
                 },
