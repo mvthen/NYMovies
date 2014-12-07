@@ -310,7 +310,7 @@ $(document).ready(function() {
     function search_filter(query) {
 
         $(".results").show();
-        $("#headerwrap").hide();
+        $(".wrap").hide();
 
         var search_url = ''
 
