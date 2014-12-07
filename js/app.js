@@ -268,6 +268,21 @@ $(document).ready(function() {
         }
     });
 
+    $('.lightbox').lightbox();
+    $('.lightbox').click(function() {
+        $('html').addClass("open-lightbox");
+        setTimeout(function() {
+            $('html.open-lightbox').css("overflow", "hidden");
+        }, 300);
+    });
+
+    $('.jquery-lightbox-button-close').click(function() {
+        $('html.open-lightbox').css("overflow-y", "scroll");
+        setTimeout(function() {
+            $('html').removeClass("open-lightbox");
+        }, 300);
+    });
+
     function search_filter(query) {
 
         $(".results").show();
@@ -296,7 +311,6 @@ $(document).ready(function() {
             }
         }
 
-
         if (query['reviewer_name']) {
             if (search_url.length != 0) {
                 search_url += '&reviewer=' + query['reviewer_name']
@@ -312,7 +326,8 @@ $(document).ready(function() {
             }
         }
 
-
+        var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:white;'>Your results for: {0}</h2></div>", query['query']);
+        $("#posters").append(title);
 
         var message =
             $.ajax({
@@ -323,6 +338,7 @@ $(document).ready(function() {
                 success: function(data, textStats, XMLHttpRequest) {
                     // display_first(data, search_type, arg);
                     //console.log(data);
+
                     var search_data = data;
                     for (var i = 0; i < data['results'].length; i++) {
                         //will print first 10 search results
@@ -340,17 +356,19 @@ $(document).ready(function() {
                         query_data["article_link"] = article_link;
                         var article_title = data['results'][i]['link']['suggested_link_text'];
                         query_data["article_title"] = article_title;
-                        //rottentomatoes ajax call for poster
+                        
                         (function(lockedInIndex) {
                         $.ajax({
                             'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=short&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
-                            success: function(data, textStats, XMLHttpRequest) {    
+                            success: function(data, textStats, XMLHttpRequest, query_data) {    
                                 var poster = data["Poster"];
+
                                 if (poster !== "N/A" && poster !== undefined){
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", data["Poster"], data["Title"]);
-                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='#'>{0}</a></div>", img);
+                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail lightbox' \
+                                        href='images/ipad-hand.png?lightbox[iframe]=true&lightbox[width]=90p&lightbox[height]=90p'>{0}</a></div>", img);
                                     $("#posters").append(total);
                                 }
                                 else {
