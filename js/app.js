@@ -35,9 +35,9 @@ $(document).ready(function() {
             success: function(data, textStats, XMLHttpRequest) {
                 console.log(data);
                 for (var i = 0; i < 15; i++){
-                    var picture = String.format("<div class=\"item\"><img src=\"{0}\" alt=\"Owl Image\"></div>", data["movies"][i]["posters"]["detailed"]);
+                    var picture = String.format("<div class=\"owl-item\"><img src=\"{0}\" alt=\"Owl Image\" style='width: 342px;'></div>", data["movies"][i]["posters"]["detailed"]);
                     console.log(picture);
-                    $("#owl-demo").append(picture);
+                    $(".owl-wrapper").append(picture);
                 }
             },
             error: function(data, textStatus, errorThrown) {
