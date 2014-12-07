@@ -29,22 +29,48 @@ $(document).ready(function() {
         return theString;
     }
 
-        $.ajax({
-            'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
-            'type': 'GET',
-            'dataType': 'jsonp',
-            success: function(data, textStats, XMLHttpRequest) {
-                // console.log(data);
-                for (var i = 0; i < 15; i++){
-                    var picture = String.format("<div class=\"owl-item\"><img src=\"{0}\" alt=\"Owl Image\" style='width: 342px;'></div>", data["movies"][i]["posters"]["detailed"]);
-                    console.log(picture);
-                    //$(".owl-wrapper").prepend(picture);
-                }
-            },
-            error: function(data, textStatus, errorThrown) {
-                console.log("error");
+    $.ajax({
+        'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
+        'type': 'GET',
+        'dataType': 'jsonp',
+        success: function(data, textStats, XMLHttpRequest) {
+            var array = [];
+            for (var i = 0; i < 15; i++){
+                var title = data["movies"][i]["title"].replace(' ', '+');
+                array.push(title);
             }
-        });
+            carousel_search(array);
+        },
+        error: function(data, textStatus, errorThrown) {
+            console.log("error");
+        }
+
+    });
+
+    function carousel_search(array) {
+        for (var i = 0; i < 15; i++){
+            var query_data=array[i];
+            omdb_search(query_data, i)
+            
+        }
+    }
+
+    function omdb_search(query_data, i) {
+        $.ajax({
+                'url': 'http://www.omdbapi.com/?t='+query_data+'&y=&plot=short&r=json',
+                'type': 'GET',
+                'dataType': 'jsonp',
+                success: function(data, textStats, XMLHttpRequest) {
+                    var poster = data["Poster"];
+                    console.log(poster);
+                    var picture = String.format("<img src='{0} alt='Owl Image'>", poster);
+                    $("#owl"+i).append(picture);
+                },
+                error: function(data, textStatus, errorThrown) {
+                    console.log('error');
+                }
+            });
+    }
 
 
     $("#results").hide();
@@ -92,7 +118,7 @@ $(document).ready(function() {
      $("#owl-demo").owlCarousel({
  
       autoPlay: 2000, //Set AutoPlay to 3 seconds
-      items : 4,
+      items : 5,
       itemsDesktop : [1199,3],
       itemsDesktopSmall : [979,3],
       navigation: true,
@@ -362,9 +388,8 @@ $(document).ready(function() {
                             'dataType': 'jsonp',
                             success: function(data, textStats, XMLHttpRequest, query_data) {    
                                 var poster = data["Poster"];
-
                                 if (poster !== "N/A" && poster !== undefined){
-                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", data["Poster"], data["Title"]);
+                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail lightbox' \
                                         href='images/ipad-hand.png?lightbox[iframe]=true&lightbox[width]=90p&lightbox[height]=90p'>{0}</a></div>", img);
                                     $("#posters").append(total);
