@@ -18,6 +18,10 @@
 	width:60px;
 }
 
+.logo_div {
+	margin-top: -20px;
+}
+
 .no-padding {
     padding: 0;
 }
@@ -62,10 +66,9 @@
 	height:42px;
 }
 
-/*.checkbox-btn {
-	width:460px;
-	height:42px;
-}*/
+.results {
+	margin-top: 60px;
+}
 
 .switch-box {
 	text-align: left;

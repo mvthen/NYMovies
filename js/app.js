@@ -5,9 +5,14 @@ $(document).ready(function() {
     // password: uicoms4170
     // 6czc3ebkafxvwceb68dhqnz2
 
+    $(".results").hide();
+
     var user = "";
     var pw = "";
-    var rt_apikey = '6czc3ebkafxvwceb68dhqnz2';
+    var rt_apikey = "6czc3ebkafxvwceb68dhqnz2";
+    var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
+    var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
+    var omdb_api_key = "e4cb03fb";
 
     
     String.format = function() {
@@ -26,14 +31,12 @@ $(document).ready(function() {
         return theString;
     }
 
-
-
         $.ajax({
             'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
             'type': 'GET',
             'dataType': 'jsonp',
             success: function(data, textStats, XMLHttpRequest) {
-                console.log(data);
+                // console.log(data);
                 for (var i = 0; i < 15; i++){
                     var picture = String.format("<div class=\"owl-item\"><img src=\"{0}\" alt=\"Owl Image\" style='width: 342px;'></div>", data["movies"][i]["posters"]["detailed"]);
                     console.log(picture);
@@ -47,9 +50,6 @@ $(document).ready(function() {
 
 
     $("#results").hide();
-
-    var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
-    var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
 
 
     $("#registerBtn").click(function(event) {
@@ -270,6 +270,9 @@ $(document).ready(function() {
 
     function search_filter(query) {
 
+        $(".results").show();
+        $("#headerwrap").hide();
+
         var search_url = ''
 
         //construct query url
@@ -344,11 +347,9 @@ $(document).ready(function() {
                             'type': 'GET',
                             'dataType': 'jsonp',
                             success: function(data, textStats, XMLHttpRequest) {
-                                //console.log(search_data);
-                                for (var i = 0; i < data.length; i++){
-                                    console.log(data);
-
-                                }
+                                var img = String.format("<img class='img-responsive' src='{0}' alt=''>", data["movies"][0]["posters"]["thumbnail"]);
+                                var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='#'>{0}</a></div>", img);
+                                $("#posters").append(total);
                             },
                             error: function(data, textStatus, errorThrown) {
                                 console.log("error");
@@ -374,7 +375,6 @@ $(document).ready(function() {
                 'type': 'GET',
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
-                    // display_first(data, search_type, arg);
                     console.log(data);
                 },
                 error: function(data, textStatus, errorThrown) {
