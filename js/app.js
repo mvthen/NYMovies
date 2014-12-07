@@ -91,8 +91,6 @@ $(document).ready(function() {
         }
     });
 
-    $("[name='switch-state']").bootstrapSwitch();
-
      $("#owl-demo").owlCarousel({
  
       autoPlay: 2000, //Set AutoPlay to 3 seconds
@@ -122,16 +120,25 @@ $(document).ready(function() {
         });
     }
 
+
     $("#submitBtn").click(function() {
         var query_text = document.getElementById('query').value;
         var min_date = document.getElementById('mindate').value;
         var reviewer_name = document.getElementById('reviewer_name').value;
 
-        var type = $('[data-switch-get]').data('switch-get');
-        var critic_pick = $('#switch-' + type).bootstrapSwitch(type)
+        var critic_pick = $('#critic-switch').prop('checked');
+        if (critic_pick == true){
+            critic_pick = 'Y'
+        } else {
+            critic_pick = 'N'
+        }
 
-        var type2 = $('[data-switch-get]').data('switch-get');
-        var top_thousand = $('#switch-' + type2).bootstrapSwitch(type2)
+        var top_thousand = $('#thous-switch').prop('checked');
+        if (top_thousand == true){
+            top_thousand = 'Y'
+        } else {
+            top_thousand = 'N'
+        }
 
         var query_info = {}
         query_text = query_text.replace(' ', '+');
@@ -269,6 +276,24 @@ $(document).ready(function() {
         if (query['query']) {
             search_url += 'query=' + query['query']
         }
+
+        if (query['critic_pick'] == 'Y'){
+            if (search_url.length != 0) {
+                search_url += '&critics-pick=Y'
+            } else {
+                search_url += 'critics-pick=Y'
+            }
+        }
+
+        if (query['top_thousand'] == 'Y'){
+            if (search_url.length != 0) {
+                search_url += '&thousand-best=Y'
+            } else {
+                search_url += 'thousand-best=Y'
+            }
+        }
+
+
         if (query['reviewer_name']) {
             if (search_url.length != 0) {
                 search_url += '&reviewer=' + query['reviewer_name']
@@ -283,6 +308,8 @@ $(document).ready(function() {
                 search_url += 'opening_date=' + query['min_date']
             }
         }
+
+
 
         var message =
             $.ajax({
