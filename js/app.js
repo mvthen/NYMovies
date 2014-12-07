@@ -343,13 +343,20 @@ $(document).ready(function() {
                         //rottentomatoes ajax call for poster
                         (function(lockedInIndex) {
                         $.ajax({
-                            'url': 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=' + rt_apikey + '&q=' + query_data["movie_title"],
+                            'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=short&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
                             success: function(data, textStats, XMLHttpRequest) {
-                                var img = String.format("<img class='img-responsive' src='{0}' alt=''>", data["movies"][0]["posters"]["thumbnail"]);
-                                var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='#'>{0}</a></div>", img);
-                                $("#posters").append(total);
+                                
+                                var poster = data["Poster"];
+                                if (poster !== "N/A" && poster !== undefined){
+                                    var img = String.format("<img class='img-responsive' src='{0}' alt=''>", data["Poster"]);
+                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='#'>{0}</a></div>", img);
+                                    $("#posters").append(total);
+                                }
+                                else {
+                                    console.log("no poster");
+                                }
                             },
                             error: function(data, textStatus, errorThrown) {
                                 console.log("error");
