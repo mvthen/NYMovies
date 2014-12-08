@@ -316,45 +316,57 @@ $(document).ready(function() {
         $(".results").show();
         $(".wrap").hide();
 
-        var search_url = ''
+        var search_url = '';
+        var resultstring = '';
 
         //construct query url
         if (query['query']) {
-            search_url += 'query=' + query['query']
+            search_url += 'query=' + query['query'];
+            resultstring += query['query'].replace('+',' ');
         }
 
         if (query['critic_pick'] == 'Y'){
             if (search_url.length != 0) {
-                search_url += '&critics-pick=Y'
+                search_url += '&critics-pick=Y';
+                resultstring += '; Critic Pick';
             } else {
-                search_url += 'critics-pick=Y'
+                search_url += 'critics-pick=Y';
+                resultstring += 'Critic Pick';
             }
         }
 
         if (query['top_thousand'] == 'Y'){
             if (search_url.length != 0) {
-                search_url += '&thousand-best=Y'
+                search_url += '&thousand-best=Y';
+                resultstring += '; Top Thousand';
             } else {
-                search_url += 'thousand-best=Y'
+                search_url += 'thousand-best=Y';
+                resultstring += 'Top Thousand';
             }
         }
 
         if (query['reviewer_name']) {
             if (search_url.length != 0) {
-                search_url += '&reviewer=' + query['reviewer_name']
+                search_url += '&reviewer=' + query['reviewer_name'];
+                resultstring += '; Reviewer: '+query['reviewer_name'].replace('-',' ');
             } else {
-                search_url += 'reviewer=' + query['reviewer_name']
+                search_url += 'reviewer=' + query['reviewer_name'];
+                resultstring += 'Reviewer: '+query['reviewer_name'].replace('-',' ');
             }
         }
         if (query['min_date']) {
             if (search_url != 0) {
-                search_url += '&opening_date=' + query['min_date']
+                search_url += '&opening_date=' + query['min_date'];
+                resultstring += '; Opening Date: ' + query['min_date'];
             } else {
-                search_url += 'opening_date=' + query['min_date']
+                search_url += 'opening_date=' + query['min_date'];
+                resultstring += 'Opening Date: ' + query['min_date'];
             }
         }
 
-        var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:white;'>Your results for: {0}</h2></div>", query['query']);
+
+
+        var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
         $("#posters").append(title);
 
         var message =
