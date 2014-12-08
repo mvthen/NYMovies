@@ -4,6 +4,10 @@ $(document).ready(function() {
     // username: uxperts
     // password: uicoms4170
     // 6czc3ebkafxvwceb68dhqnz2
+    $('.logo_div').click(function(){
+        location.reload();
+    });
+
 
     $(".results").hide();
 
