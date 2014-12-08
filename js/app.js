@@ -380,6 +380,11 @@ $(document).ready(function() {
                     //console.log(data);
 
                     var search_data = data;
+
+                    if (search_data['results'].length == 0){
+                        $("#posters").append("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Sorry, no results were found</h2></div>");
+                    }
+
                     for (var i = 0; i < data['results'].length; i++) {
                         //will print first 10 search results
                         var query_data = {};
