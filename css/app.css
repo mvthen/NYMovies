@@ -124,3 +124,11 @@
 #critic {
 	border-right: 1px solid #cccccc;
 }
+
+#critic span {
+	padding-right: 11px;
+}
+
+#query-label {
+	padding-right: 31px;
+}
