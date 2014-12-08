@@ -109,7 +109,7 @@
 	vertical-align: middle;
 	width: 50%;
 	float:left;
-    padding: 6px 5px;
+    padding: 5px 5px 5px 13px;
     font-size:14px;   
     font-weight: normal;
     color: #555555; 
@@ -117,12 +117,13 @@
 }
 
 .bootstrap-switch {
-	margin-left: 20px;
+	margin-left: 10px;
 	margin-top: -2px;
 }
 
 #critic {
 	border-right: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
 }
 
 #critic span {
@@ -131,4 +132,30 @@
 
 #query-label {
 	padding-right: 31px;
+}
+
+#query {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border-right: 0;
+}
+
+#reviewer_name {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border-right: 0;
+	border-top: 0;
+}
+
+#reviewer-label {
+	border-top: 0;
+}
+
+.calendar div {
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+}
+
+#switch-boxes {
+	border-bottom: 1px solid #cccccc;
 }
