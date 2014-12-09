@@ -78,7 +78,7 @@ $(document).ready(function() {
                     var poster = data["Poster"];
                     console.log(poster);
                     var picture = String.format("<img src='{0} alt='Owl Image'>", poster);
-                    $("#owl"+i).append(picture);
+                    $("#owl"+(i+1)).append(picture);
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log('error');
