@@ -397,7 +397,7 @@ function search_filter(query) {
                     var query_data = search_data['results'][i];
                     var movie_title = data['results'][i]['link']['suggested_link_text'];
                     movie_title = movie_title.replace('Read the New York Times Review of', '');
-                    query_data["movie_title"] = movie_title;
+                    query_data["movie_title"] = search_data['results'][i]['display_title'];
  
                     var movie_id = data['results'][i]['nyt_movie_id'];
  
@@ -443,8 +443,7 @@ function search_filter(query) {
                                         //console.log("title is " + title)
                                         //console.log("movie id " + movie_id);
                                         if (title in entries) {
-                                            $('#modal-movie-' + entries[title]['movie_id'] + ' .modal-header .movie-rating').rateit('reset');
-                                            event.preventDefault();
+                                            
  
                                             $.ajax({
                                                 url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits/" + entries[title]['db_id'] + "?apiKey=" + mongo_api_key,
@@ -458,6 +457,9 @@ function search_filter(query) {
                                                 error: function(xhr, status, err) {}
                                             });
                                             delete entries[title];
+
+                                            $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
+                                            event.preventDefault();
  
                                         } else {
                                             $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit('reset');
