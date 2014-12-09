@@ -366,8 +366,8 @@ $(document).ready(function() {
 
 
 
-        var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
-        $("#posters").append(title);
+        var title = "<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Loading...</h2></div>";
+        $("#posters").html(title);
 
         var message =
             $.ajax({
@@ -376,6 +376,8 @@ $(document).ready(function() {
                 'type': 'GET',
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
+                    var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
+                    $("#posters").html(title);
                     // display_first(data, search_type, arg);
                     //console.log(data);
 
