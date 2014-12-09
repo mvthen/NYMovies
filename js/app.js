@@ -5,7 +5,6 @@ var mongo_api_key = "hPnzcGaD0tgcmoL6KwVPXoNLMXc8d71l";
 var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
 var omdb_api_key = "e4cb03fb";
  
- 
 var favorite_movies = {};
 var entries = {};
  
@@ -40,6 +39,7 @@ $(document).ready(function() {
  
     });
  
+    // populates bookmarks modal
     $('.bookmarks').click(function() {
         
         $('#bmmb').empty();
@@ -64,7 +64,6 @@ $(document).ready(function() {
     $(".results").hide();
     $("#bookmarked").hide();
  
- 
     String.format = function() {
         // The string containing the format items (e.g. "{0}")
         // will and always has to be the first argument.
@@ -78,7 +77,8 @@ $(document).ready(function() {
         }
         return theString;
     }
- 
+    
+    // Carousel call to rottentomatoes
     $.ajax({
         'url': 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=' + rt_apikey,
         'type': 'GET',
@@ -94,7 +94,6 @@ $(document).ready(function() {
         error: function(data, textStatus, errorThrown) {
             console.log("error");
         }
- 
     });
  
     function carousel_search(array) {
@@ -104,8 +103,6 @@ $(document).ready(function() {
  
         }
     }
- 
- 
  
     $("#results").hide();
  
@@ -135,47 +132,15 @@ $(document).ready(function() {
         $("#login_valid").empty();
     });
  
-    $("#loginBtn").click(function(ev) {
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        if (login(username, password)) {
-            user = username;
-            pw = password;
-            $('#loginModal').modal('hide');
- 
-        } else {
-            $("#registerMessages").append("<p id='#incorrect_login'> Your username/password is incorrect. </p>");
-        }
-    });
- 
     $("#owl-demo").owlCarousel({
  
         autoPlay: 2000, //Set AutoPlay to 3 seconds
         items: 5,
         itemsDesktop: [1199, 3],
         itemsDesktopSmall: [979, 3],
-        // navigation: true,
-        // navigationText: ["<", ">"]
     });
- 
-    function login(username, password) {
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
-            type: "GET",
-            contentType: "application/json",
-            success: function(data) {
-                for (var item in data) {
-                    console.log(data[item]["username"]);
-                    if (username == data[item]["username"] && password == data[item]["password"]) {
-                        return true;
-                    }
-                }
-                return false;
-            },
-            error: function(xhr, status, err) {}
-        });
-    }
- 
+    
+    // Takes form elements to query
     $("#submitBtn").click(function() {
         var query_text = document.getElementById('query').value;
         var min_date = document.getElementById('mindate').value;
@@ -220,56 +185,9 @@ $(document).ready(function() {
         startView: 2,
         minView: 2,
         forceParse: 0,
-        // endDate: "-1d",
-        // startDate: "2004-01-01"
     });
  
-    function addUser(username, password) {
-        var obj = {};
-        obj["username"] = username;
-        obj["password"] = password;
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
-            type: "GET",
-            contentType: "application/json",
-            success: function(data) {
-                for (var item in data) {
-                    console.log(data[item]["username"]);
-                    if (username = data[item]["username"]) {
-                        return false;
-                    }
-                }
-            },
-            error: function(xhr, status, err) {}
-        });
- 
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
-            data: JSON.stringify(obj),
-            type: "POST",
-            contentType: "application/json",
-            success: function(data, textStats, XMLHttpRequest) {
-                console.log(data);
-            },
-            error: function(data, textStatus, errorThrown) {}
-        });
-    }
- 
-    $('.lightbox').lightbox();
-    $('.lightbox').click(function() {
-        $('html').addClass("open-lightbox");
-        setTimeout(function() {
-            $('html.open-lightbox').css("overflow", "hidden");
-        }, 300);
-    });
- 
-    $('.jquery-lightbox-button-close').click(function() {
-        $('html.open-lightbox').css("overflow-y", "scroll");
-        setTimeout(function() {
-            $('html').removeClass("open-lightbox");
-        }, 300);
-    });
- 
+    // find posters for carousel
     function omdb_search(query_data, i) {
         $.ajax({
             'url': 'http://www.omdbapi.com/?t=' + query_data + '&y=&plot=full&r=json',
@@ -310,6 +228,7 @@ $(document).ready(function() {
  
 });
  
+ // search filters
 function search_filter(query) {
  
     $(".results").show();
@@ -364,7 +283,7 @@ function search_filter(query) {
     }
  
  
- 
+    
     var title = "<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Loading...</h2></div>";
     $("#posters").html(title);
  
@@ -415,7 +334,6 @@ function search_filter(query) {
  
                     $("#posters").html(title);
  
-                    //(function(lockedInIndex) {
                         $.ajax({
                             'url': 'http://www.omdbapi.com/?t=' + encodeURIComponent(query_data["movie_title"]) + '&y=&plot=short&r=json',
                             'type': 'GET',
@@ -423,14 +341,11 @@ function search_filter(query) {
                             'movie_id': movie_id,
                             'query_data': query_data,
                             success: function(data, textStats, XMLHttpRequest) {
-                                //console.log("movie id is " + movie_id)
-                                //console.log("this.movie_id " + this.movie_id)
+
                                 var poster = data["Poster"];
                                 var title = data["Title"];
-                                console.log(data)
                                 if (poster !== "N/A" && poster !== undefined) {
  
-                                    //THIS CORRECTLY CHANGES THE TITLE
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({
                                         max: 1,
                                         step: 1
@@ -439,9 +354,8 @@ function search_filter(query) {
                                     var movie_id = this.movie_id;
                                     $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').bind('rated', function(event, value) {
                                         // Toggle rating
-                                        //console.log("title is " + title)
-                                        //console.log("movie id " + movie_id);
 
+                                        // checks for duplicates in db
                                         if (title in entries) {
                                             $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').rateit('reset');
                                             event.preventDefault();
@@ -458,15 +372,12 @@ function search_filter(query) {
                                                 error: function(xhr, status, err) {}
                                             });
                                             delete entries[title];
+
                                         } else {
+                                            
                                             $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').rateit('value', 1);
                                             event.preventDefault();
-                                            // $(this).rateit();
-                                            //console.log(value)
-                                            // favorite_movies[this.movie_id] = value;
-                                            // favorite = true;                                            
-                                            // favorite_movies[movie_id] = value;                                            
-                                            //console.log("this.movie_id " + this)                                         
+
                                             var bookmark = {};                                            
                                             bookmark["title"] = title;                                            
                                             bookmark["poster"] = poster;
@@ -483,18 +394,17 @@ function search_filter(query) {
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 success: function(data, textStats, XMLHttpRequest) {
-                                                    console.log(data)
                                                     entries[title] = {
                                                         db_id: data['_id']['$oid'],
                                                         movie_id: data['movie_id']
                                                     }
-                                                    console.log(entries)
                                                 },
-                                                error: function(data, textStatus, errorThrown) { console.log(data)}
+                                                error: function(data, textStatus, errorThrown) { console.log("error")}
                                             });
                                         }
                                     });
  
+                                    // populate modal
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                     if (this.query_data["mpaa_rating"]) {
                                         $('#modal-movie-' + this.movie_id + ' .modal-header .mpaa-rating').text("(" + this.query_data["mpaa_rating"] + ")");
@@ -536,8 +446,6 @@ function search_filter(query) {
                                 console.log("error");
                             }
                         });
-                    //})(search_data);
- 
                 }
             },
             error: function(data, textStatus, errorThrown) {
