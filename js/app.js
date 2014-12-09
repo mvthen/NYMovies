@@ -393,7 +393,7 @@ $(document).ready(function() {
                     else {
                         var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
                     }
-                    $("#posters").html(title);
+                    
                     // display_first(data, search_type, arg);
                     //console.log(data);
 
@@ -425,6 +425,8 @@ $(document).ready(function() {
                         $($('#modal-movie-template').html()).appendTo('#movie-container');
                         var last_movie = $('#movie-container .modal').last();
                         last_movie.attr('id', 'modal-movie-'+movie_id);
+                        
+                        $("#posters").html(title);
                         
                         (function(lockedInIndex) {
                         $.ajax({
