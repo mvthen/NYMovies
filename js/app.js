@@ -435,13 +435,15 @@ function search_filter(query) {
                                         max: 1,
                                         step: 1
                                     });
- 
-                                    $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').bind('rated', function(event, value) {
+                                    
+                                    var movie_id = this.movie_id;
+                                    $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').bind('rated', function(event, value) {
                                         // Toggle rating
                                         //console.log("title is " + title)
                                         //console.log("movie id " + movie_id);
+
                                         if (title in entries) {
-                                            $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
+                                            $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').rateit('reset');
                                             event.preventDefault();
  
                                             $.ajax({
@@ -457,7 +459,7 @@ function search_filter(query) {
                                             });
                                             delete entries[title];
                                         } else {
-                                            $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit('reset');
+                                            $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').rateit('value', 1);
                                             event.preventDefault();
                                             // $(this).rateit();
                                             //console.log(value)
