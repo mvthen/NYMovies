@@ -14,7 +14,17 @@ $(document).ready(function() {
         $(".bookedmarked").show();
         $(".wrap").hide();
         $(".results").hide();
-
+        $.ajax({
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
+            type: "GET",
+            contentType: "application/json",
+            success: function(data) {
+                for (var item in data) {
+                    console.log(data);
+                }
+            },
+            error: function(xhr, status, err) {}
+        });
     });
 
     $(".wrap").show();
@@ -447,10 +457,24 @@ $(document).ready(function() {
                                             delete favorite_movies[this.movie_id];
                                             value = 0;
                                             event.preventDefault();
+
+
                                         } else {
                                             favorite_movies[this.movie_id] = value;
+                                            var bookmark = {};
+                                            bookmark["title"]= title;
+                                            bookmark["poster"] = poster;
+                                            $.ajax({
+                                                url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
+                                                data: JSON.stringify(bookmark),
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                success: function(data, textStats, XMLHttpRequest) {
+                                                    console.log(data);
+                                                },
+                                                error: function(data, textStatus, errorThrown) {}
+                                            });
                                         }
-                                        alert(title + " " + value);
                                     });
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                     if (this.query_data["mpaa_rating"]) {
@@ -463,11 +487,11 @@ $(document).ready(function() {
                                     $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text("Plot: " + data["Plot"]);
                                     $('#modal-movie-' + this.movie_id + ' .modal-body .actors').text("Actors: " + data["Actors"]);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
-
+                                    //target=\"_blank\"
                                     $('#modal-movie-' + this.movie_id + ' .movie-review h5').text("Review by " + this.query_data['byline']);
-                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.full-review').attr("href", this.query_data['link']['url']);
-                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.readers-review').attr("href", this.query_data['related_urls'][3]['url']);
-                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.watch-trailer').attr("href", this.query_data['related_urls'][4]['url']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.full-review').attr("href", this.query_data['link']['url']).attr("target", "\"_blank\"");
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.readers-review').attr("href", this.query_data['related_urls'][3]['url']).attr("target", "\"_blank\"").attr("target", "\"_blank\"");
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.watch-trailer').attr("href", this.query_data['related_urls'][4]['url']).attr("target", "\"_blank\"").attr("target", "\"_blank\"");
                                     if (this.query_data['summary_short']) {
                                         $('#modal-movie-' + this.movie_id + ' .movie-review p').html(this.query_data['summary_short']);
                                     } else if (this.query_data['capsule_review']) {
