@@ -53,7 +53,11 @@
                     </li>
                     <li><a href="#"> <div class="reload">Search Again</div></a>
                     </li>
+<<<<<<< HEAD
+                    <li><a href="#"> <div class="bookmarks">Bookmarks</div></a>
+=======
                     <li><a href="#bookmark-modal" data-toggle='modal'> <div class="bookmarks">Bookmarks </div></a>
+>>>>>>> 01bd12d74a698945736aa58a4bd8bfbe8094cc2d
                     </li>
                 </ul>
             </div>
@@ -99,7 +103,7 @@
       </div>
       <div class="modal-body">
         <p>Created by Ariana Giorgi, Sandya Sankarram, Serena Simkus, and Mei-Vern Then.</p>
-        <p>Powered using the <a href="http://developer.nytimes.com/docs/movie_reviews_api/">New York Times Movie Reviews API</a>, the <a href="http://developer.rottentomatoes.com/docs">Rotten Tomatoes API</a>, and the <a href="http://www.omdbapi.com/">IMDB API</a>.</p>
+        <p>Powered using the <a href="http://developer.nytimes.com/docs/movie_reviews_api/">New York Times Movie Reviews API.</a></p>
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-default">Neat!</button>
@@ -168,6 +172,71 @@
         </div>
     </div>
 
+
+    <!-- Register form modal
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form name="login-form" id="register" class="login-form form-group" action="" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title header">Create a new kernel!</h4>
+                </div>
+                <div class="modal-wrapper">
+                    <div class="user-icon"></div>
+                    <div class="pass-icon"></div>
+
+                    <div class="modal-body">
+                        <div class="content">
+                            <input name="username" type="text" class="input username" id="usernameReg" value="Username" onfocus="this.value=''" />
+                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
+
+                        </div>
+
+                    </div>
+                    <div id="registerMessages"></div>
+                    <div id="register_valid"></div>
+
+                </div>
+                <div class="modal-footer footer">
+                    <input type="submit" name="submit" value="Register" id="registerBtn" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+l -->
+
+    <!--  
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form name="login-form" id="login" class="login-form form-group" action="" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title header" id="myModalLabel">Login to your kernel!</h4>
+                </div>
+                <div class="modal-wrapper">
+                    <div class="user-icon"></div>
+                    <div class="pass-icon"></div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <input name="username" type="text" class="input username" id="username" value="Username" onfocus="this.value=''" />
+                            <input name="password" type="password" class="input password" id="password" value="Password" onfocus="this.value=''" />
+                        </div>
+
+                    </div>
+                    <div id="messages"></div>
+                    <div id="login_valid"></div>
+
+                </div>
+                <div class="modal-footer footer">
+                    <input type="submit" name="submit" value="Login" id="loginBtn" class="button" data-dismiss="modal" />
+                </div>
+            </form>
+        </div>
+    </div>
+-->
+
     <div class="results">
 
         <div class="container">
@@ -204,6 +273,7 @@
                             </div>
                           </div>
                           <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                       </div>
                 </div>
 
@@ -226,10 +296,13 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4 class="modal-title">Bookmarks!</h4>
           </div>
-          <div class="modal-body" id='bmmb' style="padding-top:5px;">
+          <div class="modal-body" id='bmmb'>
             <!-- <p>BOOKMARKS HERE</p> -->
           </div>
-
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
 
     </div>
