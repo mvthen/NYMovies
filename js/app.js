@@ -4,7 +4,7 @@ $(document).ready(function() {
     // username: uxperts
     // password: uicoms4170
     // 6czc3ebkafxvwceb68dhqnz2
-    $('.logo_div').click(function(){
+    $('.reload').click(function(){
         location.reload();
     });
 
@@ -125,8 +125,8 @@ $(document).ready(function() {
       items : 5,
       itemsDesktop : [1199,3],
       itemsDesktopSmall : [979,3],
-      navigation: true,
-      navigationText: ["<", ">"]
+      // navigation: true,
+      // navigationText: ["<", ">"]
  
   });
 
