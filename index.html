@@ -53,7 +53,7 @@
                     </li>
                     <li><a href="#"> <div class="reload">Search Again</div></a>
                     </li>
-                    <li><a href="#"> <div class="bookmarks">Bookmarks </div></a>
+                    <li><a href="#bookmark-modal" data-toggle='modal'> <div class="bookmarks">Bookmarks </div></a>
                     </li>
                 </ul>
             </div>
@@ -284,33 +284,19 @@ l -->
     </div>
 
     <div id="bookmarked" style="padding-top:10%;">
-        <div id="modal-movie-bm-template">
-                        <div id="modalbox" class="modal container fade" tabindex="-1" style="display: none;">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="pull-left"><span class="modal-title">Movie Title</span> <span class="mpaa-rating"></span></h4>
-                            <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Favorite this">
-                            <span class="rateit-tooltip movie-rating" data-rateit-starwidth="32" data-rateit-starheight="32"></span></span>
-                            <div class="clearfix"></div>
-                          </div>
-                          <div class="modal-body">
-                            <img src="" class="pull-left">
-                            <p class="opening-date"></p>
-                            <p class="actors"></p>
-                            <p class="plot">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium.</p>
-                            <div class="movie-review">
-                                <hr>
-                                <h5></h5>
-                                <p></p>
-                                <a href="" class="full-review">Read full review</a> ·
-                                <a href="" class="readers-review">Read readers' reviews</a> ·
-                                <a href="" class="watch-trailer">Watch the trailer</a>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                      </div>
-                </div>
+        <div id="bookmark-modal" class="modal container fade" tabindex="-1" style="display: none;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Bookmarks!</h4>
+          </div>
+          <div class="modal-body" id='bmmb'>
+            <!-- <p>BOOKMARKS HERE</p> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
 
     </div>
 </div>

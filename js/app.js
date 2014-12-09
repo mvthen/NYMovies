@@ -22,21 +22,21 @@ $(document).ready(function() {
     });
 
     $('.bookmarks').click(function() {
-        $("#bookmarked").empty();
-        $("#bookmarked").show();
-        $(".wrap").hide();
-        $(".results").hide();
+        //$("#bookmarked").empty();
+        //$("#bookmarked").show();
+        //$(".wrap").hide();
+        //$(".results").hide();
         $.ajax({
             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
             type: "GET",
             contentType: "application/json",
             success: function(data) {
                 if (data.length === 0) {
-                    $("#bookmarked").append(String.format("<div><h1>{0}</h1></div>", "You haven't bookmarked any movies yet!"));
+                    $("#bmmb").append(String.format("<div><h1>{0}</h1></div>", "You haven't bookmarked any movies yet!"));
                 }
                 for (var key in data) {
                     var item = data[key];
-                    $("#bookmarked").append(data[key]["html"]);
+                    $("#bmmb").append(data[key]["html"]);
                 }
             },
             error: function(xhr, status, err) {}
@@ -458,7 +458,7 @@ function search_filter(query) {
                                                     bookmark["title"] = title;                                            
                                                     bookmark["poster"] = poster;
                                                                                         
-                                                    var img = String.format("<img class='img-responsive' src='{0}' style=\"{1}\"><div class='text'><div class='middle'>{2}</div></div>", poster, "width:227px;height:351px;", data["Title"]);                                                                        
+                                                    var img = String.format("<img class='img-responsive' src='{0}' style=\"{1}\"><div class='text'><div class='middle'>{2}</div></div>", poster, "width:230px;height:351px;", data["Title"]);                                                                        
                                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal href='#modal-movie-bm-" + movie_id + "'>{0}</a></div>", img);
 
                                                                                        
