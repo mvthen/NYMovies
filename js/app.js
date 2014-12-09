@@ -392,7 +392,7 @@ $(document).ready(function() {
                         var query_data = search_data['results'][i];
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of', '');
-                        query_data["movie_title"] = movie_title.replace(" ", "+");
+                        query_data["movie_title"] = movie_title;
 
                         var movie_id = data['results'][i]['nyt_movie_id'];
 
@@ -412,10 +412,11 @@ $(document).ready(function() {
                         
                         (function(lockedInIndex) {
                         $.ajax({
-                            'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=full&r=json',
+                            'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=full&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
                             'movie_id': movie_id,
+                            'query_data': query_data,
                             success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
                                 var title = data['Title']
@@ -429,6 +430,7 @@ $(document).ready(function() {
 
                                     //THIS CORRECTLY CHANGES THE TITLE 
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text(this.query_data["opening_date"]);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
 
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
