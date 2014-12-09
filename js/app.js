@@ -407,7 +407,7 @@ $(document).ready(function() {
                         query_data["article_title"] = article_title;
 
                         $($('#modal-movie-template').html()).appendTo('#movie-container');
-                        var last_movie = $('#movie-container .modal-movie').last();
+                        var last_movie = $('#movie-container .modal').last();
                         last_movie.attr('id', 'modal-movie-'+movie_id);
                         
                         (function(lockedInIndex) {
@@ -415,6 +415,7 @@ $(document).ready(function() {
                             'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=full&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
+                            'movie_id': movie_id,
                             success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
                                 var title = data['Title']
@@ -422,20 +423,19 @@ $(document).ready(function() {
                                     // alert(data["Title"]);
                                     var i = 0;
                                     console.log(title)
-                                    //alert($('#modal-movie-' + movie_id).find('.modalbox').find('.modal-header').html());
-                                    //alert($('#modal-movie-' + movie_id).html());
+                                    // alert($('#modal-movie-' + movie_id).html());
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
                                     //$('.modal-title').text(search_data['results'][i]['display_title']);
 
                                     //THIS CORRECTLY CHANGES THE TITLE 
-                                    $('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').text(title);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
 
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
                                     
                                     //BUT THE CORRECT MODAL IS NOT SHOWING UP??
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
-                                        href='#modal-movie-"+movie_id+" #modalbox'>{0}</a></div>", img);
+                                        href='#modal-movie-"+this.movie_id+"'>{0}</a></div>", img);
                                     $("#posters").append(total);
                                     i++;
                                 }
