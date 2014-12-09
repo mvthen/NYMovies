@@ -11,15 +11,23 @@ $(document).ready(function() {
     });
 
     $('.bookmarks').click(function(){
-        $(".bookedmarked").show();
+        $("#bookmarked").show();
         $(".wrap").hide();
         $(".results").hide();
         $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
+            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
             type: "GET",
             contentType: "application/json",
             success: function(data) {
-                console.log(data);
+                for (var key in data) {
+                    var item = data[key];
+                    var title = String.format("<div>{0}</div>", item["title"]);
+                    var img = String.format("<img src=\"{0}\"></img>", item["poster"]);
+                    var div = String.format("<div>{0}{1}</div>", title, img);
+                    $("#bookmarked").append(div);
+                    
+                }
+
             },
             error: function(xhr, status, err) {}
         });
@@ -244,74 +252,6 @@ $(document).ready(function() {
             error: function(data, textStatus, errorThrown) {}
         });
     }
-
-    // $('#register').bootstrapValidator({
-    //     container: '#registerMessages',
-    //     fields: {
-    //         username: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The username is required and can\'t be empty'
-    //                 },
-    //                 stringLength: {
-    //                     min: 6,
-    //                     max: 30,
-    //                     message: 'The username must be more than 6 and less than 30 characters long'
-    //                 },
-    //                 different: {
-    //                     field: 'password',
-    //                     message: 'The username and password can\'t be the same as each other'
-    //                 }
-    //             }
-    //         },
-    //         password: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: "Password must not be empty"
-    //                 },
-    //                 stringLength: {
-    //                     min: 4,
-    //                     max: 30,
-    //                     message: 'The password must be more than 3 and less than 30 characters long'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // $('#login').bootstrapValidator({
-    //     container: '#messages',
-    //     fields: {
-    //         username: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The username is required and can\'t be empty'
-    //                 },
-    //                 stringLength: {
-    //                     min: 6,
-    //                     max: 30,
-    //                     message: 'The username must be more than 6 and less than 30 characters long'
-    //                 },
-    //                 regexp: {
-    //                     regexp: /^[a-zA-Z0-9_\.]+$/,
-    //                     message: 'The username can only consist of alphabetical, number, dot and underscore'
-    //                 }
-    //             }
-    //         },
-    //         password: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: "Password must not be empty"
-    //                 },
-    //                 stringLength: {
-    //                     min: 4,
-    //                     max: 30,
-    //                     message: 'The password must be more than 3 and less than 30 characters long'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
 
     $('.lightbox').lightbox();
     $('.lightbox').click(function() {
