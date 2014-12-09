@@ -7,6 +7,7 @@ var omdb_api_key = "e4cb03fb";
 
 
 var favorite_movies = {};
+var entries={};
 
 $(document).ready(function() {
 
@@ -205,51 +206,51 @@ $(document).ready(function() {
         startDate: "2004-01-01"
     });
 
-    function addUser(username, password) {
-        var obj = {};
-        obj["username"] = username;
-        obj["password"] = password;
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
-            type: "GET",
-            contentType: "application/json",
-            success: function(data) {
-                for (var item in data) {
-                    console.log(data[item]["username"]);
-                    if (username = data[item]["username"]) {
-                        return false;
-                    }
-                }
-            },
-            error: function(xhr, status, err) {}
-        });
+    // function addUser(username, password) {
+    //     var obj = {};
+    //     obj["username"] = username;
+    //     obj["password"] = password;
+    //     $.ajax({
+    //         url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
+    //         type: "GET",
+    //         contentType: "application/json",
+    //         success: function(data) {
+    //             for (var item in data) {
+    //                 console.log(data[item]["username"]);
+    //                 if (username = data[item]["username"]) {
+    //                     return false;
+    //                 }
+    //             }
+    //         },
+    //         error: function(xhr, status, err) {}
+    //     });
 
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
-            data: JSON.stringify(obj),
-            type: "POST",
-            contentType: "application/json",
-            success: function(data, textStats, XMLHttpRequest) {
-                console.log(data);
-            },
-            error: function(data, textStatus, errorThrown) {}
-        });
-    }
+    //     $.ajax({
+    //         url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
+    //         data: JSON.stringify(obj),
+    //         type: "POST",
+    //         contentType: "application/json",
+    //         success: function(data, textStats, XMLHttpRequest) {
+    //             console.log(data);
+    //         },
+    //         error: function(data, textStatus, errorThrown) {}
+    //     });
+    // }
 
-    $('.lightbox').lightbox();
-    $('.lightbox').click(function() {
-        $('html').addClass("open-lightbox");
-        setTimeout(function() {
-            $('html.open-lightbox').css("overflow", "hidden");
-        }, 300);
-    });
+    // $('.lightbox').lightbox();
+    // $('.lightbox').click(function() {
+    //     $('html').addClass("open-lightbox");
+    //     setTimeout(function() {
+    //         $('html.open-lightbox').css("overflow", "hidden");
+    //     }, 300);
+    // });
 
-    $('.jquery-lightbox-button-close').click(function() {
-        $('html.open-lightbox').css("overflow-y", "scroll");
-        setTimeout(function() {
-            $('html').removeClass("open-lightbox");
-        }, 300);
-    });
+    // $('.jquery-lightbox-button-close').click(function() {
+    //     $('html.open-lightbox').css("overflow-y", "scroll");
+    //     setTimeout(function() {
+    //         $('html').removeClass("open-lightbox");
+    //     }, 300);
+    // });
 
     function omdb_search(query_data, i) {
         $.ajax({
@@ -413,30 +414,59 @@ function search_filter(query) {
                                 $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({ max: 1, step: 1});
                                 $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').bind('rated', function (event, value) {
                                     // Toggle rating
-                                    if (this.movie_id in favorite_movies) {
-                                        $(this).rateit('reset');
-                                        delete favorite_movies[this.movie_id];
-                                        value = 0;
-                                        event.preventDefault();
-
-
-                                    } else {
-                                        favorite_movies[this.movie_id] = value;
-                                        var bookmark = {};
-                                        bookmark["title"]= title;
-                                        bookmark["poster"] = poster;
-                                        bookmark["unique"]= true; 
-                                        $.ajax({
+                                    $.ajax({
                                             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
-                                            data: JSON.stringify(bookmark),
-                                            type: "POST",
+                                            type: "GET",
                                             contentType: "application/json",
-                                            success: function(data, textStats, XMLHttpRequest) {
-                                                console.log(data);
+                                            success: function(results) {
+                                                console.log(results);
+            
+                                                for (var key=0; key<results.length; key++) {   
+                                                    var movie_title = results[key]["title"];
+                                                    var movie_id = results[key]["_id"]["$oid"];
+                                                    entries[movie_title]=movie_id; 
+                                                }
+
+                                                if (title in entries) {
+                                                    console.log("duplicate");
+                                                    console.log(entries[title]);
+                                                    $.ajax({ 
+                                                        // url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits/"+entries[title]+"?apiKey=" + mongo_api_key,
+                                                        url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits/54874859e4b00a38a5f14974?apiKey=" + mongo_api_key,
+                                                          type: "DELETE",
+                                                          dataType: "jsonp",
+                                                          async: true,
+                                                          timeout: 300000,
+                                                          success: function (data) { console.log("deleted"); },
+                                                          error: function (xhr, status, err) { } 
+                                                    });
+
+                                                } else {
+                                                    // $(this).rateit();
+                                                    favorite_movies[this.movie_id] = value;
+                                                    var bookmark = {};
+                                                    bookmark["title"]= title;
+                                                    bookmark["poster"] = poster;
+                                                    console.log("ok");
+
+                                                    $.ajax({
+                                                        url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
+                                                        data: JSON.stringify(bookmark),
+                                                        type: "POST",
+                                                        contentType: "application/json",
+                                                        success: function(data, textStats, XMLHttpRequest) {
+                                                            console.log(data);
+                                                        },
+                                                        error: function(data, textStatus, errorThrown) {}
+                                                    });
+                                                    // $(this).rateit('reset');
+                                                    // value = 0;
+                                                    // event.preventDefault();
+                                                }
+
                                             },
-                                            error: function(data, textStatus, errorThrown) {}
+                                            error: function(xhr, status, err) {}
                                         });
-                                    }
                                 });
                                 $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                 if (this.query_data["mpaa_rating"]) {
