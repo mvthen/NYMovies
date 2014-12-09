@@ -195,7 +195,7 @@ $(document).ready(function() {
     });
 
     $('.form_date').datetimepicker({
-        format: "mm/dd/yyyy",
+        format: "yyyy-mm-dd",
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
