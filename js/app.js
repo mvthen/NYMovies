@@ -89,9 +89,7 @@ $(document).ready(function() {
             });
     }
 
-
     $("#results").hide();
-
 
     $("#registerBtn").click(function(event) {
         var username = document.getElementById('username').value;
@@ -140,7 +138,6 @@ $(document).ready(function() {
       itemsDesktopSmall : [979,3],
       // navigation: true,
       // navigationText: ["<", ">"]
- 
   });
 
     function login(username, password) {
@@ -160,7 +157,6 @@ $(document).ready(function() {
             error: function(xhr, status, err) {}
         });
     }
-
 
     $("#submitBtn").click(function() {
         var query_text = document.getElementById('query').value;
@@ -241,73 +237,73 @@ $(document).ready(function() {
         });
     }
 
-    $('#register').bootstrapValidator({
-        container: '#registerMessages',
-        fields: {
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    different: {
-                        field: 'password',
-                        message: 'The username and password can\'t be the same as each other'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: "Password must not be empty"
-                    },
-                    stringLength: {
-                        min: 4,
-                        max: 30,
-                        message: 'The password must be more than 3 and less than 30 characters long'
-                    }
-                }
-            }
-        }
-    });
+    // $('#register').bootstrapValidator({
+    //     container: '#registerMessages',
+    //     fields: {
+    //         username: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The username is required and can\'t be empty'
+    //                 },
+    //                 stringLength: {
+    //                     min: 6,
+    //                     max: 30,
+    //                     message: 'The username must be more than 6 and less than 30 characters long'
+    //                 },
+    //                 different: {
+    //                     field: 'password',
+    //                     message: 'The username and password can\'t be the same as each other'
+    //                 }
+    //             }
+    //         },
+    //         password: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: "Password must not be empty"
+    //                 },
+    //                 stringLength: {
+    //                     min: 4,
+    //                     max: 30,
+    //                     message: 'The password must be more than 3 and less than 30 characters long'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
-    $('#login').bootstrapValidator({
-        container: '#messages',
-        fields: {
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: "Password must not be empty"
-                    },
-                    stringLength: {
-                        min: 4,
-                        max: 30,
-                        message: 'The password must be more than 3 and less than 30 characters long'
-                    }
-                }
-            }
-        }
-    });
+    // $('#login').bootstrapValidator({
+    //     container: '#messages',
+    //     fields: {
+    //         username: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The username is required and can\'t be empty'
+    //                 },
+    //                 stringLength: {
+    //                     min: 6,
+    //                     max: 30,
+    //                     message: 'The username must be more than 6 and less than 30 characters long'
+    //                 },
+    //                 regexp: {
+    //                     regexp: /^[a-zA-Z0-9_\.]+$/,
+    //                     message: 'The username can only consist of alphabetical, number, dot and underscore'
+    //                 }
+    //             }
+    //         },
+    //         password: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: "Password must not be empty"
+    //                 },
+    //                 stringLength: {
+    //                     min: 4,
+    //                     max: 30,
+    //                     message: 'The password must be more than 3 and less than 30 characters long'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
     $('.lightbox').lightbox();
     $('.lightbox').click(function() {
@@ -390,15 +386,14 @@ $(document).ready(function() {
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
                     $("#posters").empty();
+                    $("#load").hide();
+                    
                     if (resultstring==""){
                         var title = "<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Top Movies </h2></div>";
                     }
                     else {
                         var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
                     }
-                    
-                    // display_first(data, search_type, arg);
-                    //console.log(data);
 
                     var search_data = data;
 
@@ -430,7 +425,7 @@ $(document).ready(function() {
                         last_movie.attr('id', 'modal-movie-'+movie_id);
                         
                         $("#posters").html(title);
-                        
+
                         (function(lockedInIndex) {
                         $.ajax({
                             'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=short&r=json',
@@ -442,10 +437,6 @@ $(document).ready(function() {
                                 var poster = data["Poster"];
                                 var title = data["Title"];
                                 if (poster !== "N/A" && poster !== undefined){
-                                    // alert(data["Title"]);
-                                    // alert($('#modal-movie-' + movie_id).html());
-                                    //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
-                                    //$('.modal-title').text(search_data['results'][i]['display_title']);
 
                                     //THIS CORRECTLY CHANGES THE TITLE
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({ max: 1, step: 1});
@@ -487,9 +478,9 @@ $(document).ready(function() {
 
                                     $('[data-toggle="tooltip"]').tooltip();
 
-                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
+
+                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'><div class='middle'>{1}</div></div>", poster, data["Title"]);
                                     
-                                    //BUT THE CORRECT MODAL IS NOT SHOWING UP??
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
                                         href='#modal-movie-"+this.movie_id+"'>{0}</a></div>", img);
                                     $("#posters").append(total);
