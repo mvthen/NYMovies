@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     $('.bookmarks').click(function() {
-        //$("#bookmarked").empty();
+        $("#bmmb").empty();
         //$("#bookmarked").show();
         //$(".wrap").hide();
         //$(".results").hide();
