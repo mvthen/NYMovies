@@ -88,8 +88,6 @@ $(document).ready(function() {
         }
     }
 
-
-
     $("#results").hide();
 
     $("#registerBtn").click(function(event) {
@@ -203,55 +201,8 @@ $(document).ready(function() {
         startView: 2,
         minView: 2,
         forceParse: 0,
-        // endDate: "-1d",
-        // startDate: "2004-01-01"
     });
 
-    function addUser(username, password) {
-        var obj = {};
-        obj["username"] = username;
-        obj["password"] = password;
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/login_info?apiKey=" + mongo_api_key,
-            type: "GET",
-            contentType: "application/json",
-            success: function(data) {
-                for (var item in data) {
-                    console.log(data[item]["username"]);
-                    if (username = data[item]["username"]) {
-                        return false;
-                    }
-                }
-            },
-            error: function(xhr, status, err) {}
-        });
-
-        $.ajax({
-            url: "https://api.mongolab.com/api/1/databases/webdev/collections/hits?apiKey=" + mongo_api_key,
-            data: JSON.stringify(obj),
-            type: "POST",
-            contentType: "application/json",
-            success: function(data, textStats, XMLHttpRequest) {
-                console.log(data);
-            },
-            error: function(data, textStatus, errorThrown) {}
-        });
-    }
-
-    $('.lightbox').lightbox();
-    $('.lightbox').click(function() {
-        $('html').addClass("open-lightbox");
-        setTimeout(function() {
-            $('html.open-lightbox').css("overflow", "hidden");
-        }, 300);
-    });
-
-    $('.jquery-lightbox-button-close').click(function() {
-        $('html.open-lightbox').css("overflow-y", "scroll");
-        setTimeout(function() {
-            $('html').removeClass("open-lightbox");
-        }, 300);
-    });
 
     function omdb_search(query_data, i) {
         $.ajax({
@@ -262,7 +213,6 @@ $(document).ready(function() {
             success: function(data, textStats, XMLHttpRequest) {
                 var poster = data["Poster"];
                 var title = data["Title"];
-                // console.log(poster);
                 var picture = String.format("<a href=''><img src='{0} alt='Owl Image'></a>", poster);
                 $("#owl" + (i + 1)).append(picture);
 
@@ -454,7 +404,6 @@ function search_filter(query) {
                                                     favorite_movies[this.movie_id] = value;
                                                     favorite = true;                                            
                                                     favorite_movies[movie_id] = value;                                            
-                                                    console.log(movie_id);                                            
                                                     var bookmark = {};                                            
                                                     bookmark["title"] = title;                                            
                                                     bookmark["poster"] = poster;
