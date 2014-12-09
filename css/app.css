@@ -80,12 +80,24 @@
 .thumb{
 	width:270px;
 	height:367px;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 }
 
 .thumbnail {
-	height:367px;
+	height:351px;
 	width:100%;
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+#posters {
+	margin: 30px;
+}
+
+.img-responsive {
+	display: inline-block;
+	height:341px;
 }
 
 .text, .text-js {
@@ -93,15 +105,17 @@
     position: absolute;
     bottom: 0;
     margin-left: -5px;
+    margin-bottom: 16px;
     width: 240px;
-    height:367px;
+    height:351px;
     background: #999;
     background: rgba(0,0,0,0.8);
     text-align: center;
+    vertical-align: middle;
     font-size: 18px;
     font-weight: bold;
     color:#3498db;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 .thumb:hover .text {
