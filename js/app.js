@@ -386,6 +386,8 @@ $(document).ready(function() {
                 'dataType': "jsonp",
                 success: function(data, textStats, XMLHttpRequest) {
                     $("#posters").empty();
+                    $("#load").hide();
+                    
                     if (resultstring==""){
                         var title = "<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Top Movies </h2></div>";
                     }
@@ -423,7 +425,7 @@ $(document).ready(function() {
                         last_movie.attr('id', 'modal-movie-'+movie_id);
                         
                         $("#posters").html(title);
-                        
+
                         (function(lockedInIndex) {
                         $.ajax({
                             'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=short&r=json',
