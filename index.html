@@ -53,7 +53,11 @@
                     </li>
                     <li><a href="#"> <div class="reload">Search Again</div></a>
                     </li>
+<<<<<<< HEAD
                     <li><a href="#"> <div class="bookmarks">Bookmarks</div></a>
+=======
+                    <li><a href="#bookmark-modal" data-toggle='modal'> <div class="bookmarks">Bookmarks </div></a>
+>>>>>>> 01bd12d74a698945736aa58a4bd8bfbe8094cc2d
                     </li>
                 </ul>
             </div>
@@ -125,7 +129,7 @@
                         <div class="form-format calendar no-padding">
                             <div class="input-group date form_date no-padding"  style="border-bottom-right-radius:4px; border-top-right-radius:4px;" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                 <div class="input-group-addon">Opening Date</div>
-                                <input class="form-control" id="mindate" size="16" type="text" value="" readonly placeholder="Pick a date">
+                                <input class="form-control" id="mindate" size="16" type="text" value="" readonly placeholder="Pick a date" style="background-color: white;">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -287,33 +291,19 @@ l -->
     </div>
 
     <div id="bookmarked" style="padding-top:10%;">
-        <div id="modal-movie-bm-template">
-                        <div id="modalbox" class="modal container fade" tabindex="-1" style="display: none;">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="pull-left"><span class="modal-title">Movie Title</span> <span class="mpaa-rating"></span></h4>
-                            <span class="pull-right" data-toggle="tooltip" data-placement="top" title="Favorite this">
-                            <span class="rateit-tooltip movie-rating" data-rateit-starwidth="32" data-rateit-starheight="32"></span></span>
-                            <div class="clearfix"></div>
-                          </div>
-                          <div class="modal-body">
-                            <img src="" class="pull-left">
-                            <p class="opening-date"></p>
-                            <p class="actors"></p>
-                            <p class="plot">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium.</p>
-                            <div class="movie-review">
-                                <hr>
-                                <h5></h5>
-                                <p></p>
-                                <a href="" class="full-review">Read full review</a> ·
-                                <a href="" class="readers-review">Read readers' reviews</a> ·
-                                <a href="" class="watch-trailer">Watch the trailer</a>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                      </div>
-                </div>
+        <div id="bookmark-modal" class="modal container fade" tabindex="-1" style="display: none;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Bookmarks!</h4>
+          </div>
+          <div class="modal-body" id='bmmb'>
+            <!-- <p>BOOKMARKS HERE</p> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
 
     </div>
 </div>
