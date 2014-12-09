@@ -177,7 +177,7 @@ $(document).ready(function() {
     });
  
     $('.form_date').datetimepicker({
-        format: "mm/dd/yyyy",
+        format: "yyyy-mm-dd",
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
@@ -374,7 +374,7 @@ function search_filter(query) {
                                             delete entries[title];
 
                                         } else {
-                                            
+
                                             $('#modal-movie-' + movie_id + ' .modal-header .movie-rating').rateit('value', 1);
                                             event.preventDefault();
 
