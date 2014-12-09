@@ -440,7 +440,6 @@ $(document).ready(function() {
 
                                     $('[data-toggle="tooltip"]').tooltip();
 
-
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'><div class='middle'>{1}</div></div>", poster, data["Title"]);
                                     
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
