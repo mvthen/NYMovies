@@ -47,9 +47,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal">Help</a>
+                    <li><a href="#help-modal" data-toggle="modal">Help</a>
                     </li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal">About</a>
+                    <li><a href="#about-modal" data-toggle="modal">About</a>
                     </li>
                     <li><a href="#"> <div class="reload">Search Again</div></a>
                     </li>
@@ -58,6 +58,49 @@
                 </ul>
             </div>
         </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal container fade" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Welcome to Popcorn!</h4>
+      </div>
+      <div class="modal-body">
+        <p>We are here to help you find movies based off of expert reviews by the New York Times critics.</p>
+        <p>To begin, enter a search query.</p>
+        <p>To help narrow your search, you can search for movies that have been labeled “Critics Picks,” in which a critic has recommended a movie. To turn this feature on, toggle the button to “Yes”.</p>
+        <p><img src='images/criticspick.png' style='left:50%;width:947px;height:264px'></p>
+        <p>Similarly, you can choose to turn on or off the option to select a movie that has been listed as one of the <a href="http://www.nytimes.com/ref/movies/1000best.html">Best 1,000 Movies Ever Made</a>.</p>
+        <p><img src='images/topthous.png' style='left:50%;width:947px;height:264px'></p>
+        <p>If you’re looking for a movie that is currently in theatres, we offer suggestions below the search bar. Click on one of these movies to search reviews for that movie.</p>
+        <p><p>
+        <p>Once you enter your search, you can hover over a movie to see the title.</p>
+        <p><img src='images/search1.png' style='left:50%;width:840px;height:430px'></p>
+        <p><img src='images/search2.png' style='left:50%;width:840px;height:430px'></p>
+        <p> When you select a movie, you will see actor, plot, and review information.</p>
+        <p><img src='images/search3.png' style='left:50%;width:1200px;height:570px'></p>
+        If you like what you see, you can bookmark the movie for future reference.
+        <p><img src='images/favorite.png' style='left:50%;width:220px;height:110px'></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Thanks!</button>
+      </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal container fade" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">About Popcorn</h4>
+      </div>
+      <div class="modal-body">
+        <p>Created by Ariana Giorgi, Sandya Sankarram, Serena Simkus, and Mei-Vern Then.</p>
+        <p>Powered using the <a href="http://developer.nytimes.com/docs/movie_reviews_api/">New York Times Movie Reviews API.</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Neat!</button>
+      </div>
     </div>
 
 <!-- Search Form -->
@@ -199,7 +242,6 @@ l -->
                 <div class="container" id="movie-container"></div>
 
                 <!-- Bootstrap Modal -->
-                <!-- <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#full-width">View Demo</button> -->
                     <div id="modal-movie-template">
                         <div id="modalbox" class="modal container fade" tabindex="-1" style="display: none;">
                           <div class="modal-header">

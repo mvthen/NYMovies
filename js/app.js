@@ -258,9 +258,105 @@ $(document).ready(function() {
                 'dataType': 'jsonp',
                 'search_filter': 'search_filter',
                 success: function(data, textStats, XMLHttpRequest) {
+<<<<<<< Updated upstream
                     var poster = data["Poster"];
                     var title = data["Title"];
                     console.log(poster);
+=======
+                    $("#posters").empty();
+                    $("#load").hide();
+                    
+                    if (resultstring==""){
+                        var title = "<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Top Movies </h2></div>";
+                    }
+                    else {
+                        var title = String.format("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Your results for: {0}</h2></div>", resultstring);
+                    }
+
+                    var search_data = data;
+
+                    if (search_data['results'].length == 0){
+                        $("#posters").append("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Sorry, no results were found</h2></div>");
+                    }
+
+                    for (var i = 0; i < search_data['results'].length; i++) {
+                        //will print first 10 search results
+                        var query_data = search_data['results'][i];
+                        var movie_title = data['results'][i]['link']['suggested_link_text'];
+                        movie_title = movie_title.replace('Read the New York Times Review of', '');
+                        query_data["movie_title"] = movie_title;
+
+                        var movie_id = data['results'][i]['nyt_movie_id'];
+
+                        var opening_date = data['results'][i]['opening_date'];
+                        query_data["opening_date"] = opening_date;
+
+                        var mpaa_rating = data['results'][i]['mpaa_rating'];
+                        query_data["mpaa_rating"] = mpaa_rating;
+                        var article_link = data['results'][i]['link']['url'];
+                        query_data["article_link"] = article_link;
+                        var article_title = data['results'][i]['link']['suggested_link_text'];
+                        query_data["article_title"] = article_title;
+
+                        $($('#modal-movie-template').html()).appendTo('#movie-container');
+                        var last_movie = $('#movie-container .modal').last();
+                        last_movie.attr('id', 'modal-movie-'+movie_id);
+                        
+                        $("#posters").html(title);
+
+                        (function(lockedInIndex) {
+                        $.ajax({
+                            'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=short&r=json',
+                            'type': 'GET',
+                            'dataType': 'jsonp',
+                            'movie_id': movie_id,
+                            'query_data': query_data,
+                            success: function(data, textStats, XMLHttpRequest) {    
+                                var poster = data["Poster"];
+                                var title = data["Title"];
+                                if (poster !== "N/A" && poster !== undefined){
+
+                                    //THIS CORRECTLY CHANGES THE TITLE
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({ max: 1, step: 1});
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').bind('rated', function (event, value) {
+                                        // Toggle rating
+                                        if (this.movie_id in favorite_movies) {
+                                            $(this).rateit('reset');
+                                            delete favorite_movies[this.movie_id];
+                                            value = 0;
+                                            event.preventDefault();
+                                        } else {
+                                            favorite_movies[this.movie_id] = value;
+                                        }
+                                        //alert(title + " " + value);
+                                    });
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
+                                    if (this.query_data["mpaa_rating"]) {
+                                        $('#modal-movie-' + this.movie_id + ' .modal-header .mpaa-rating').text("(" + this.query_data["mpaa_rating"] + ")");
+                                    }
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body img').attr('src', poster);
+                                    if (this.query_data["opening_date"]) {
+                                        $('#modal-movie-' + this.movie_id + ' .modal-body .opening-date').text("Opening date: " + moment(this.query_data["opening_date"], 'YYYY-MM-DD').format('MMM. Do, YYYY'));
+                                    }
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text("Plot: " + data["Plot"]);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .actors').text("Actors: " + data["Actors"]);
+                                    //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
+
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review h5').text("Review by " + this.query_data['byline']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.full-review').attr("href", this.query_data['link']['url']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.readers-review').attr("href", this.query_data['related_urls'][3]['url']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.watch-trailer').attr("href", this.query_data['related_urls'][4]['url']);
+                                    if (this.query_data['summary_short']) {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review p').html(this.query_data['summary_short']);
+                                    } else if (this.query_data['capsule_review']) {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review p').html(this.query_data['capsule_review']);
+                                    } else {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review').hide();
+                                    }
+
+                                    $('[data-toggle="tooltip"]').tooltip();
+
+>>>>>>> Stashed changes
 
                     var picture = String.format("<a href=''><img src='{0} alt='Owl Image'></a>", poster);
                     $("#owl"+(i+1)).append(picture);
