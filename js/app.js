@@ -441,7 +441,8 @@ function search_filter(query) {
                                         //console.log("title is " + title)
                                         //console.log("movie id " + movie_id);
                                         if (title in entries) {
-                                            
+                                            $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
+                                            event.preventDefault();
  
                                             $.ajax({
                                                 url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits/" + entries[title]['db_id'] + "?apiKey=" + mongo_api_key,
@@ -455,10 +456,6 @@ function search_filter(query) {
                                                 error: function(xhr, status, err) {}
                                             });
                                             delete entries[title];
-
-                                            $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
-                                            event.preventDefault();
- 
                                         } else {
                                             $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit('reset');
                                             event.preventDefault();
