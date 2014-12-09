@@ -419,18 +419,18 @@ $(document).ready(function() {
                             'query_data': query_data,
                             success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
-                                var title = data['Title']
+                                var title = data['Title'];
                                 if (poster !== "N/A" && poster !== undefined){
                                     // alert(data["Title"]);
                                     var i = 0;
-                                    console.log(title)
                                     // alert($('#modal-movie-' + movie_id).html());
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
                                     //$('.modal-title').text(search_data['results'][i]['display_title']);
 
                                     //THIS CORRECTLY CHANGES THE TITLE 
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
-                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text(this.query_data["opening_date"]);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .opening_date').text(this.query_data["opening_date"]);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text(data["Plot"]);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
 
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
