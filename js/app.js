@@ -418,24 +418,24 @@ $(document).ready(function() {
                         
                         (function(lockedInIndex) {
                         $.ajax({
-                            'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=full&r=json',
+                            'url': 'http://www.omdbapi.com/?t='+encodeURIComponent(query_data["movie_title"])+'&y=&plot=short&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
                             'movie_id': movie_id,
                             'query_data': query_data,
                             success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
-                                var title = data['Title'];
+                                var title = data["Title"];
                                 if (poster !== "N/A" && poster !== undefined){
                                     // alert(data["Title"]);
-                                    var i = 0;
                                     // alert($('#modal-movie-' + movie_id).html());
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
                                     //$('.modal-title').text(search_data['results'][i]['display_title']);
 
                                     //THIS CORRECTLY CHANGES THE TITLE 
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
-                                    $('#modal-movie-' + this.movie_id + ' .modal-body .opening_date').text(this.query_data["opening_date"]);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body img').attr('src', poster);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .opening-date').text(this.query_data["opening_date"]);
                                     $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text(data["Plot"]);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
 
@@ -445,7 +445,6 @@ $(document).ready(function() {
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
                                         href='#modal-movie-"+this.movie_id+"'>{0}</a></div>", img);
                                     $("#posters").append(total);
-                                    i++;
                                 }
                                 else {
                                     //console.log(data);
