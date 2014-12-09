@@ -11,6 +11,7 @@ $(document).ready(function() {
     });
 
     $('.bookmarks').click(function(){
+        $("#bookmarked").empty();
         $("#bookmarked").show();
         $(".wrap").hide();
         $(".results").hide();
@@ -21,10 +22,7 @@ $(document).ready(function() {
             success: function(data) {
                 for (var key in data) {
                     var item = data[key];
-                    var title = String.format("<div>{0}</div>", item["title"]);
-                    var img = String.format("<img src=\"{0}\"></img>", item["poster"]);
-                    var div = String.format("<div>{0}{1}</div>", title, img);
-                    $("#bookmarked").append(div);
+                    $("#bookmarked").append( data[key]["html"]);
                     
                 }
 
@@ -35,7 +33,7 @@ $(document).ready(function() {
 
     $(".wrap").show();
     $(".results").hide();
-    $(".bookedmarked").hide();
+    $("#bookmarked").hide();
 
     var user = "";
     var pw = "";
@@ -385,6 +383,7 @@ $(document).ready(function() {
                                 var poster = data["Poster"];
                                 var title = data["Title"];
                                 if (poster !== "N/A" && poster !== undefined){
+                                    favorite = false; 
 
                                     //THIS CORRECTLY CHANGES THE TITLE
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({ max: 1, step: 1});
@@ -394,15 +393,50 @@ $(document).ready(function() {
                                             $(this).rateit('reset');
                                             delete favorite_movies[this.movie_id];
                                             value = 0;
+                                            favorite = true; 
                                             event.preventDefault();
 
 
                                         } else {
-                                            favorite_movies[this.movie_id] = value;
+                                            favorite = true; 
+                                            favorite_movies[movie_id] = value;
+                                            console.log(movie_id);
                                             var bookmark = {};
                                             bookmark["title"]= title;
                                             bookmark["poster"] = poster;
-                                            bookmark["unique"]= true; 
+                                    movie_id = movie_id*2;
+                                    $('#modal-movie-bm-' + movie_id + ' .modal-header .modal-title').text(title);
+                                    if (query_data["mpaa_rating"]) {
+                                        $('#modal-movie-bm-' + movie_id + ' .modal-header .mpaa-rating').text("(" + query_data["mpaa_rating"] + ")");
+                                    }
+                                    $('#modal-movie-bm-' + movie_id + ' .modal-body img').attr('src', poster);
+                                    if (query_data["opening_date"]) {
+                                        $('#modal-movie-bm-' + movie_id + ' .modal-body .opening-date').text("Opening date: " + moment(query_data["opening_date"], 'YYYY-MM-DD').format('MMM. Do, YYYY'));
+                                    }
+                                    $('#modal-movie-bm-' + movie_id + ' .modal-body .plot').text("Plot: " + data["Plot"]);
+                                    $('#modal-movie-bm-' + movie_id + ' .modal-body .actors').text("Actors: " + data["Actors"]);
+                                    //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
+                                    //target=\"_blank\"
+                                    $('#modal-movie-bm-' + movie_id + ' .movie-review h5').text("Review by " + query_data['byline']);
+                                    $('#modal-movie-bm-' + movie_id + ' .movie-review a.full-review').attr("href", query_data['link']['url']).attr("target", "\"_blank\"");
+                                    $('#modal-movie-bm-' + movie_id + ' .movie-review a.readers-review').attr("href", query_data['related_urls'][3]['url']).attr("target", "\"_blank\"").attr("target", "\"_blank\"");
+                                    $('#modal-movie-bm-' + movie_id + ' .movie-review a.watch-trailer').attr("href", query_data['related_urls'][4]['url']).attr("target", "\"_blank\"").attr("target", "\"_blank\"");
+                                    if (query_data['summary_short']) {
+                                        $('#modal-movie-bm-' + movie_id + ' .movie-review p').html(query_data['summary_short']);
+                                    } else if (query_data['capsule_review']) {
+                                        $('#modal-movie-bm-' + movie_id + ' .movie-review p').html(query_data['capsule_review']);
+                                    } else {
+                                        $('#modal-movie-bm-' + movie_id + ' .movie-review').hide();
+                                    }
+
+                                    $('[data-toggle="tooltip"]').tooltip();
+
+                                    var img = String.format("<img class='img-responsive' src='{0}'><div class='text'><div class='middle'>{1}</div></div>", poster, data["Title"]);
+                                    
+                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
+                                        href='#modal-movie-bm-"+movie_id+"'>{0}</a></div>", img);
+                                    alert("asd");
+                                            bookmark["html"] = total;
                                             $.ajax({
                                                 url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
                                                 data: JSON.stringify(bookmark),
@@ -412,9 +446,10 @@ $(document).ready(function() {
                                                     console.log(data);
                                                 },
                                                 error: function(data, textStatus, errorThrown) {}
-                                            });
+                                            });                                           
                                         }
                                     });
+
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                     if (this.query_data["mpaa_rating"]) {
                                         $('#modal-movie-' + this.movie_id + ' .modal-header .mpaa-rating').text("(" + this.query_data["mpaa_rating"] + ")");
@@ -446,6 +481,7 @@ $(document).ready(function() {
                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
                                         href='#modal-movie-"+this.movie_id+"'>{0}</a></div>", img);
                                     $("#posters").append(total);
+
                                 }
                                 else {
                                     //console.log(data);
