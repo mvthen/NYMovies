@@ -402,6 +402,7 @@ $(document).ready(function() {
                                             var bookmark = {};
                                             bookmark["title"]= title;
                                             bookmark["poster"] = poster;
+                                            bookmark[unique]= true; 
                                             $.ajax({
                                                 url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
                                                 data: JSON.stringify(bookmark),
