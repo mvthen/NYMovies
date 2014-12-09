@@ -377,7 +377,7 @@ function search_filter(query) {
                     var query_data = search_data['results'][i];
                     var movie_title = data['results'][i]['link']['suggested_link_text'];
                     movie_title = movie_title.replace('Read the New York Times Review of', '');
-                    query_data["movie_title"] = movie_title;
+                    query_data["movie_title"] = search_data['results'][i]['display_title'];
 
                     var movie_id = data['results'][i]['nyt_movie_id'];
 
