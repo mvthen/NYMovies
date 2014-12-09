@@ -387,7 +387,6 @@ function search_filter(query) {
                                             var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal href='#modal-movie-bm-" + movie_id + "'>{0}</a></div>", img);
                                                                                
                                             bookmark["html"] = total;
-                                            console.log(bookmark)
                                             $.ajax({
                                                 url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
                                                 data: JSON.stringify(bookmark),
