@@ -431,7 +431,7 @@ function search_filter(query) {
                                                 }
 
                                                 if (title in entries) {
-                                                    $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
+                                                    $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('value', 1);
                                                     event.preventDefault();
 
                                                     $.ajax({
@@ -445,10 +445,11 @@ function search_filter(query) {
                                                         },
                                                         error: function(xhr, status, err) {}
                                                     });
-
                                                     delete entries[title];
 
                                                 } else {
+                                                    $('#modal-movie-' + entries[title] + ' .modal-header .movie-rating').rateit('reset');
+                                                    event.preventDefault();
                                                     // $(this).rateit();
                                                     favorite_movies[this.movie_id] = value;
                                                     favorite = true;                                            
@@ -460,7 +461,6 @@ function search_filter(query) {
                                                                                         
                                                     var img = String.format("<img class='img-responsive' src='{0}' style=\"{1}\"><div class='text'><div class='middle'>{2}</div></div>", poster, "width:230px;height:351px;", data["Title"]);                                                                        
                                                     var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal href='#modal-movie-bm-" + movie_id + "'>{0}</a></div>", img);
-
                                                                                        
                                                     bookmark["html"] = total;
 
