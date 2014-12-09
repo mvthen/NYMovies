@@ -21,6 +21,7 @@ $(document).ready(function() {
     });
 
     $('.bookmarks').click(function(){
+        $("#bookmarked").empty();
         $("#bookmarked").show();
         $(".wrap").hide();
         $(".results").hide();
@@ -31,10 +32,7 @@ $(document).ready(function() {
             success: function(data) {
                 for (var key in data) {
                     var item = data[key];
-                    var title = String.format("<div>{0}</div>", item["title"]);
-                    var img = String.format("<img src=\"{0}\"></img>", item["poster"]);
-                    var div = String.format("<div>{0}{1}</div>", title, img);
-                    $("#bookmarked").append(div);
+                    $("#bookmarked").append( data[key]["html"]);
                     
                 }
 
@@ -45,7 +43,7 @@ $(document).ready(function() {
 
     $(".wrap").show();
     $(".results").hide();
-    $(".bookedmarked").hide();
+    $("#bookmarked").hide();
 
     
     String.format = function() {
@@ -252,8 +250,6 @@ $(document).ready(function() {
             $('html').removeClass("open-lightbox");
         }, 300);
     });
-
-
 
     function omdb_search(query_data, i) {
         $.ajax({
