@@ -19,9 +19,7 @@ $(document).ready(function() {
             type: "GET",
             contentType: "application/json",
             success: function(data) {
-                for (var item in data) {
-                    console.log(data);
-                }
+                console.log(data);
             },
             error: function(xhr, status, err) {}
         });
