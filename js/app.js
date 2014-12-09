@@ -28,6 +28,9 @@ $(document).ready(function() {
     var nyt_api_key = "e0dc9ba28e7e7c252c51e01eaf637899:6:61350197";
     var omdb_api_key = "e4cb03fb";
 
+
+    var favorite_movies = {};
+
     
     String.format = function() {
         // The string containing the format items (e.g. "{0}")
@@ -444,7 +447,20 @@ $(document).ready(function() {
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
                                     //$('.modal-title').text(search_data['results'][i]['display_title']);
 
-                                    //THIS CORRECTLY CHANGES THE TITLE 
+                                    //THIS CORRECTLY CHANGES THE TITLE
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').rateit({ max: 1, step: 1});
+                                    $('#modal-movie-' + this.movie_id + ' .modal-header .movie-rating').bind('rated', function (event, value) {
+                                        // Toggle rating
+                                        if (this.movie_id in favorite_movies) {
+                                            $(this).rateit('reset');
+                                            delete favorite_movies[this.movie_id];
+                                            value = 0;
+                                            event.preventDefault();
+                                        } else {
+                                            favorite_movies[this.movie_id] = value;
+                                        }
+                                        alert(title + " " + value);
+                                    });
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
                                     if (this.query_data["mpaa_rating"]) {
                                         $('#modal-movie-' + this.movie_id + ' .modal-header .mpaa-rating').text("(" + this.query_data["mpaa_rating"] + ")");
@@ -468,6 +484,8 @@ $(document).ready(function() {
                                     } else {
                                         $('#modal-movie-' + this.movie_id + ' .movie-review').hide();
                                     }
+
+                                    $('[data-toggle="tooltip"]').tooltip();
 
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
                                     

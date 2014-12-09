@@ -198,3 +198,7 @@
 	padding-left: 20px;
 	font-style: italic;
 }
+
+.rateit button.rateit-reset {
+	display: none !important;
+}
