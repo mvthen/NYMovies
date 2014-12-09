@@ -5,11 +5,21 @@ $(document).ready(function() {
     // password: uicoms4170
     // 6czc3ebkafxvwceb68dhqnz2
     $('.reload').click(function(){
+        $(".results").hide();
         location.reload();
+
     });
 
+    $('.bookmarks').click(function(){
+        $(".bookedmarked").show();
+        $(".wrap").hide();
+        $(".results").hide();
 
+    });
+
+    $(".wrap").show();
     $(".results").hide();
+    $(".bookedmarked").hide();
 
     var user = "";
     var pw = "";

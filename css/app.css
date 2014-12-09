@@ -16,7 +16,7 @@
 .wrap {
 	/*margin-top: -10px;*/
 	background-color: #3498db;
-	min-height: 100vh;
+	height: 100vh;
 }
 
 .logo {
