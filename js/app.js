@@ -444,10 +444,28 @@ $(document).ready(function() {
 
                                     //THIS CORRECTLY CHANGES THE TITLE 
                                     $('#modal-movie-' + this.movie_id + ' .modal-header .modal-title').text(title);
+                                    if (this.query_data["mpaa_rating"]) {
+                                        $('#modal-movie-' + this.movie_id + ' .modal-header .mpaa-rating').text("(" + this.query_data["mpaa_rating"] + ")");
+                                    }
                                     $('#modal-movie-' + this.movie_id + ' .modal-body img').attr('src', poster);
-                                    $('#modal-movie-' + this.movie_id + ' .modal-body .opening-date').text(this.query_data["opening_date"]);
-                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text(data["Plot"]);
+                                    if (this.query_data["opening_date"]) {
+                                        $('#modal-movie-' + this.movie_id + ' .modal-body .opening-date').text("Opening date: " + moment(this.query_data["opening_date"], 'YYYY-MM-DD').format('MMM. Do, YYYY'));
+                                    }
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .plot').text("Plot: " + data["Plot"]);
+                                    $('#modal-movie-' + this.movie_id + ' .modal-body .actors').text("Actors: " + data["Actors"]);
                                     //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
+
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review h5').text("Review by " + this.query_data['byline']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.full-review').attr("href", this.query_data['link']['url']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.readers-review').attr("href", this.query_data['related_urls'][3]['url']);
+                                    $('#modal-movie-' + this.movie_id + ' .movie-review a.watch-trailer').attr("href", this.query_data['related_urls'][4]['url']);
+                                    if (this.query_data['summary_short']) {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review p').html(this.query_data['summary_short']);
+                                    } else if (this.query_data['capsule_review']) {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review p').html(this.query_data['capsule_review']);
+                                    } else {
+                                        $('#modal-movie-' + this.movie_id + ' .movie-review').hide();
+                                    }
 
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
                                     
@@ -490,3 +508,7 @@ $(document).ready(function() {
     }
 
 });
+
+function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
