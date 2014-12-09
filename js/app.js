@@ -61,7 +61,7 @@ $(document).ready(function() {
 
     function omdb_search(query_data, i) {
         $.ajax({
-                'url': 'http://www.omdbapi.com/?t='+query_data+'&y=&plot=short&r=json',
+                'url': 'http://www.omdbapi.com/?t='+query_data+'&y=&plot=full&r=json',
                 'type': 'GET',
                 'dataType': 'jsonp',
                 success: function(data, textStats, XMLHttpRequest) {
@@ -387,12 +387,14 @@ $(document).ready(function() {
                         $("#posters").append("<div class='col-lg-12'><h2 class='page-header' style='color:#3498db;'>Sorry, no results were found</h2></div>");
                     }
 
-                    for (var i = 0; i < data['results'].length; i++) {
+                    for (var i = 0; i < search_data['results'].length; i++) {
                         //will print first 10 search results
-                        var query_data = {};
+                        var query_data = search_data['results'][i];
                         var movie_title = data['results'][i]['link']['suggested_link_text'];
                         movie_title = movie_title.replace('Read the New York Times Review of', '');
                         query_data["movie_title"] = movie_title.replace(" ", "+");
+
+                        var movie_id = data['results'][i]['nyt_movie_id'];
 
                         var opening_date = data['results'][i]['opening_date'];
                         query_data["opening_date"] = opening_date;
@@ -403,22 +405,42 @@ $(document).ready(function() {
                         query_data["article_link"] = article_link;
                         var article_title = data['results'][i]['link']['suggested_link_text'];
                         query_data["article_title"] = article_title;
+
+                        $($('#modal-movie-template').html()).appendTo('#movie-container');
+                        var last_movie = $('#movie-container .modal-movie').last();
+                        last_movie.attr('id', 'modal-movie-'+movie_id);
                         
                         (function(lockedInIndex) {
                         $.ajax({
-                            'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=short&r=json',
+                            'url': 'http://www.omdbapi.com/?t='+query_data["movie_title"]+'&y=&plot=full&r=json',
                             'type': 'GET',
                             'dataType': 'jsonp',
-                            success: function(data, textStats, XMLHttpRequest, query_data) {    
+                            success: function(data, textStats, XMLHttpRequest) {    
                                 var poster = data["Poster"];
+                                var title = data['Title']
                                 if (poster !== "N/A" && poster !== undefined){
+                                    // alert(data["Title"]);
+                                    var i = 0;
+                                    console.log(title)
+                                    //alert($('#modal-movie-' + movie_id).find('.modalbox').find('.modal-header').html());
+                                    //alert($('#modal-movie-' + movie_id).html());
+                                    //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
+                                    //$('.modal-title').text(search_data['results'][i]['display_title']);
+
+                                    //THIS CORRECTLY CHANGES THE TITLE 
+                                    $('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').text(title);
+                                    //alert($('#modal-movie-' + movie_id + ' #modalbox .modal-header .modal-title').html());
+
                                     var img = String.format("<img class='img-responsive' src='{0}'><div class='text'>{1}</div>", poster, data["Title"]);
-                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail lightbox' \
-                                        href='images/ipad-hand.png?lightbox[iframe]=true&lightbox[width]=90p&lightbox[height]=90p'>{0}</a></div>", img);
+                                    
+                                    //BUT THE CORRECT MODAL IS NOT SHOWING UP??
+                                    var total = String.format("<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' data-toggle='modal' \
+                                        href='#modal-movie-"+movie_id+" #modalbox'>{0}</a></div>", img);
                                     $("#posters").append(total);
+                                    i++;
                                 }
                                 else {
-                                    console.log(data);
+                                    //console.log(data);
                                 }
                             },
                             error: function(data, textStatus, errorThrown) {
