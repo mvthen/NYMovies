@@ -41,10 +41,8 @@ $(document).ready(function() {
     });
  
     $('.bookmarks').click(function() {
-        //$("#bookmarked").empty();
-        //$("#bookmarked").show();
-        //$(".wrap").hide();
-        //$(".results").hide();
+        
+        $('#bmmb').empty();
         $.ajax({
             url: "https://api.mongolab.com/api/1/databases/nytimes_movie/collections/hits?apiKey=" + mongo_api_key,
             type: "GET",
