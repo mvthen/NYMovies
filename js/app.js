@@ -184,7 +184,7 @@ $(document).ready(function() {
         query_info["min_date"] = min_date;
 
         reviewer_name = reviewer_name.replace(' ', '-');
-        reviewer_name = reviewer_name.replace('.-', '.');
+        reviewer_name = reviewer_name.replace('.', '');
         query_info["reviewer_name"] = reviewer_name;
 
         query_info['critic_pick'] = critic_pick
