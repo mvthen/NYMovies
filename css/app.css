@@ -16,7 +16,7 @@
 .wrap {
 	/*margin-top: -10px;*/
 	background-color: #3498db;
-	min-height: 100vh;
+	height: 100vh;
 }
 
 .logo {
@@ -32,9 +32,12 @@
     padding: 0;
 }
 
-
+/*#owl-dmo {
+	margin-left: 10px;
+}
+*/
 #owl-demo .item{
-  /*margin: 10px;*/
+  margin: 20px;
 }
 
 #owl-demo .item img{
@@ -89,14 +92,16 @@
     display: none;
     position: absolute;
     bottom: 0;
-    margin-left: -4px;
-    width: 238px;
+    margin-left: -5px;
+    width: 240px;
+    height:367px;
     background: #999;
     background: rgba(0,0,0,0.8);
     text-align: center;
     font-size: 18px;
     font-weight: bold;
     color:#3498db;
+    border-radius: 3px;
 }
 
 .thumb:hover .text {

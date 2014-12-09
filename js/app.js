@@ -5,11 +5,21 @@ $(document).ready(function() {
     // password: uicoms4170
     // 6czc3ebkafxvwceb68dhqnz2
     $('.reload').click(function(){
+        $(".results").hide();
         location.reload();
+
     });
 
+    $('.bookmarks').click(function(){
+        $(".bookedmarked").show();
+        $(".wrap").hide();
+        $(".results").hide();
 
+    });
+
+    $(".wrap").show();
     $(".results").hide();
+    $(".bookedmarked").hide();
 
     var user = "";
     var pw = "";
@@ -68,7 +78,7 @@ $(document).ready(function() {
                     var poster = data["Poster"];
                     console.log(poster);
                     var picture = String.format("<img src='{0} alt='Owl Image'>", poster);
-                    $("#owl"+i).append(picture);
+                    $("#owl"+(i+1)).append(picture);
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log('error');
