@@ -162,4 +162,20 @@
 
 .modal-body img {
 	padding-right: 20px;
+	width: 320px;
+}
+
+.modal-body p {
+	margin-bottom: 0;
+}
+
+.modal-header .movie-rating {
+	margin: 10px 30px 0 0;
+}
+
+.movie-review p {
+	margin-left: 320px;
+	border-left: 3px solid #ccc;
+	padding-left: 20px;
+	font-style: italic;
 }
